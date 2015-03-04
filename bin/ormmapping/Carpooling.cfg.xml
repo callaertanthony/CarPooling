@@ -12,9 +12,7 @@ License Type: Evaluation
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="connection.url">jdbc:mysql://localhost:3306/carpooling</property>
-		<property name="connection.username">carpooling</property>
-		<property name="connection.password">NotReallySecretPassword</property>
-		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
+        <property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
 		<property name="hibernate.c3p0.acquire_increment">1</property>
 		<property name="hibernate.c3p0.idle_test_period">0</property>
 		<property name="hibernate.c3p0.min_size">1</property>
@@ -22,7 +20,21 @@ License Type: Evaluation
 		<property name="hibernate.c3p0.timeout">0</property>
 		<property name="show_sql">false</property>
 		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
-		<!-- mapping files -->
-		<mapping class="com.rizomm.carpooling.model.Member"/>
-	</session-factory>
+        <!-- mapping files -->
+        <mapping class="com.rizomm.carpooling.model.Member"/>
+        <mapping class="com.rizomm.carpooling.model.User"/>
+        <mapping class="com.rizomm.carpooling.model.Role"/>
+        <mapping class="com.rizomm.carpooling.model.AuthoritiesEntity"/>
+        <mapping class="com.rizomm.carpooling.model.GroupAuthoritiesEntity"/>
+        <mapping class="com.rizomm.carpooling.model.GroupMembersEntity"/>
+        <mapping class="com.rizomm.carpooling.model.GroupsEntity"/>
+        <mapping class="com.rizomm.carpooling.model.PersistentLoginsEntity"/>
+        <mapping class="com.rizomm.carpooling.model.UsersEntity"/>
+        <mapping class="com.rizomm.carpooling.model.Authoritie"/>
+        <mapping class="com.rizomm.carpooling.model.GroupAuthoritie"/>
+        <mapping class="com.rizomm.carpooling.model.GroupMember"/>
+        <mapping class="com.rizomm.carpooling.model.Group"/>
+        <mapping class="com.rizomm.carpooling.model.PersistentLogin"/>
+        <mapping class="com.rizomm.carpooling.model.UserRole"/>
+    </session-factory>
 </hibernate-configuration>

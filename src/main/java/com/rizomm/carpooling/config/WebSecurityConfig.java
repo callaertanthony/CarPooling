@@ -19,7 +19,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+		//auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery(
+                        "select username,password, enabled from users where username=?")
+                .authoritiesByUsernameQuery(
+                        "select username, role from user_roles where username=?");
 	}
 
 	@Override
@@ -31,8 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web
-		.ignoring()
-		.antMatchers("/resources/**");
+		web.ignoring().antMatchers("/resources/**");
+        web.ignoring().antMatchers("/webjars/**");
 	}
 }

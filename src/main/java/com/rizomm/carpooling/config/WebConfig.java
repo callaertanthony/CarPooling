@@ -12,6 +12,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -23,7 +24,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 // permet d'importer la classe chargé de la sécurité
 @Import({ WebSecurityConfig.class })
 @EnableWebMvc
-public class WebConfig /*extends WebMvcConfigurerAdapter*/{
+public class WebConfig extends WebMvcConfigurerAdapter {
 
 	// résoudre les vues jsp
 	@Bean(name = "viewResolver")
@@ -37,9 +38,11 @@ public class WebConfig /*extends WebMvcConfigurerAdapter*/{
 	// résoudre les ressources static
 	//@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry
-		.addResourceHandler("/resources/**")
-		.addResourceLocations("/resources/");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        if (!registry.hasMappingForPattern("/webjars/**")) {
+            registry.addResourceHandler("/webjars/**").addResourceLocations(
+                    "classpath:/META-INF/resources/webjars/");
+        }
 	}
 
 	public void addInterceptors(final InterceptorRegistry registry) {
