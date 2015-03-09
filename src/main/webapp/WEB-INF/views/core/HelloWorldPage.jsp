@@ -27,10 +27,10 @@
                             <a href="#">S'inscrire</a>
                         </li>
                         <li>
-                            <a href="#">Se connecter</a>
+                            <a href="user/login">Se connecter</a>
                         </li>
                         <li>
-                            <a href="#"> Comment ça marche</a>
+                            <a href="user/register"> Comment ça marche</a>
                         </li>
                     </ul>
                 </div>
