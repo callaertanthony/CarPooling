@@ -35,3 +35,6 @@ create table if NOT EXISTS persistent_logins (
   token varchar(64) not null,
   last_used timestamp not null
 ) engine = InnoDb;
+
+INSERT INTO `carpooling`.`users` (`username`, `password`, `enabled`) VALUES ('test', 'test', '1');
+INSERT INTO `carpooling`.`authorities` (`username`, `authority`) VALUES ('test', 'role user');
