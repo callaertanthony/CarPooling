@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="css/main.css" rel="stylesheet">
 
@@ -40,8 +40,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.jsp">Se connecter?</a></li>
-                <li><a href="register.jsp">S'enregister?</a></li>
+                <li><a href="index.jsp">Accueil</a></li>
+                <li><a href="login.jsp">Déja membre?</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -51,22 +51,15 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h1>Trouver un trajet<br/></h1>
+                <h1>Créer mon compte<br/></h1>
                 <form class="form-inline" role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="from" placeholder="De">
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="to" placeholder="Vers">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Chercher!</button>
-                </form>
-
-                <h1>Publier un trajet<br/></h1>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <input class="btn btn-lg" TYPE="button" VALUE="Publier une annonce" onclick="window.location.href='publish.jsp'">
-                    </div>
+                    <button type="submit" class="btn btn-warning btn-lg">Créer!</button>
                 </form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">

@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="img/favicon.png">
 
     <title>Carpooling</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="css/main.css" rel="stylesheet">
+
+    <!-- DatePicker -->
+    <link href="css/datepicker.css" rel="stylesheet">
 
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
@@ -40,8 +44,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.jsp">Se connecter?</a></li>
-                <li><a href="register.jsp">S'enregister?</a></li>
+                <li><a href="index.jsp">Accueil</a></li>
+                <li><a href="register.jsp">S'enregister</a></li>
+                <li><a href="login.jsp">Se connecter</a></li>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -51,22 +57,21 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h1>Trouver un trajet<br/></h1>
+                <h1>publier un trajet<br/></h1>
                 <form class="form-inline" role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="from" placeholder="De">
+                        <input type="text" class="form-control" id="from" placeholder="Départ">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="to" placeholder="Vers">
+                        <input type="text" class="form-control" id="to" placeholder="Destination">
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Chercher!</button>
-                </form>
 
-                <h1>Publier un trajet<br/></h1>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <input class="btn btn-lg" TYPE="button" VALUE="Publier une annonce" onclick="window.location.href='publish.jsp'">
+                    <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                        <input class="span2" size="16" type="text" value="12-02-2012">
+                        <span class="add-on"><i class="icon-th"></i></span>
                     </div>
+
+                    <button type="submit" class="btn btn-warning btn-lg">Publier!</button>
                 </form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
