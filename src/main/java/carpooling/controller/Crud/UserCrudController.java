@@ -42,7 +42,7 @@ public class UserCrudController {
     @RequestMapping("/{id}")
     public ModelAndView getUserPage(@PathVariable Long id) {
         LOGGER.debug("Getting user page for user={}", id);
-        return new ModelAndView("user", "user", userService.getUserById(id)
+        return new ModelAndView("crud/user/detail", "user", userService.getUserById(id)
                 .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
     }
 
@@ -50,7 +50,7 @@ public class UserCrudController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView getUserCreatePage() {
         LOGGER.debug("Getting user create form");
-        return new ModelAndView("user_create", "form", new UserCreateForm());
+        return new ModelAndView("crud/user/create", "form", new UserCreateForm());
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -59,7 +59,7 @@ public class UserCrudController {
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {
             // failed validation
-            return "user_create";
+            return "crud/user/create";
         }
         try {
             userService.create(form);
@@ -68,7 +68,7 @@ public class UserCrudController {
             // at the same time and form validation has passed for more than one of them.
             LOGGER.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
             bindingResult.reject("email.exists", "Email already exists");
-            return "user_create";
+            return "crud/user/create";
         }
         // ok, redirect
         return "redirect:/user/list";
