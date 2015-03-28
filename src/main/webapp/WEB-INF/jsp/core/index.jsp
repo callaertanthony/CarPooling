@@ -46,8 +46,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.jsp">Se connecter?</a></li>
-                <li><a href="register.jsp">S'enregister?</a></li>
+                <li><a href="${pageContext.request.contextPath}/login">Se connecter?</a></li>
+                <li><a href="${pageContext.request.contextPath}/register">S'enregister?</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -71,7 +71,7 @@
                 <h1>Publier un trajet<br/></h1>
                 <form class="form-inline" role="form">
                     <div class="form-group">
-                        <input class="btn btn-lg" TYPE="button" VALUE="Publier une annonce" onclick="window.location.href='publish.jsp'">
+                        <input class="btn btn-lg" TYPE="button" VALUE="Publier une annonce" onclick="window.location.href='${pageContext.request.contextPath}/publish'">
                     </div>
                 </form>
             </div><!-- /col-lg-6 -->

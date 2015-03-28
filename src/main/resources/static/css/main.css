@@ -8,7 +8,8 @@
  */
 
 body {
-  background-color: #f2f2f2;
+    height: 100%;
+    background-color: #f2f2f2;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     font-size: 16px;
@@ -119,15 +120,17 @@ i {
 	color: #3498db; 
 }
 
+html {
+    height: 100%
+}
+
 
 /* HeaderWrap */
 #headerwrap {
-	/* background: url(../img/bg01.jpg) no-repeat center top; */
+    height: 100%;
 	background-color: #3498db;
-	margin-top: -20px;
 	padding-top:200px;
-	background-attachment: relative;
-	background-position: center center;
+	background-position: center;
 	min-height: 650px;
 	width: 100%;
 	

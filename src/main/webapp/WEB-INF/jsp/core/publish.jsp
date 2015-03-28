@@ -44,9 +44,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.jsp">Accueil</a></li>
-                <li><a href="register.jsp">S'enregister</a></li>
-                <li><a href="login.jsp">Se connecter</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Accueil</a></li>
+                <li><a href="${pageContext.request.contextPath}/register">S'enregister</a></li>
+                <li><a href="${pageContext.request.contextPath}/login">Se connecter</a></li>
 
             </ul>
         </div><!--/.nav-collapse -->
