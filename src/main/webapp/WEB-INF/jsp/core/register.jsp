@@ -40,8 +40,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/index.jsp">Accueil</a></li>
-                <li><a href="${pageContext.request.contextPath}/login.jsp">Déja membre?</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Accueil</a></li>
+                <li><a href="${pageContext.request.contextPath}/login">Déja membre?</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
