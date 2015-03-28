@@ -14,7 +14,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/main.css" rel="stylesheet">
-kmlkm
+
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 
@@ -40,8 +40,8 @@ kmlkm
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/login.jsp">Se connecter?</a></li>
-                <li><a href="${pageContext.request.contextPath}/register.jsp">S'enregister?</a></li>
+                <li><a href="login.jsp">Se connecter?</a></li>
+                <li><a href="register.jsp">S'enregister?</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
