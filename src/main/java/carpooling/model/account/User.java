@@ -1,4 +1,4 @@
-package carpooling.model.security;
+package carpooling.model.account;
 
 import javax.persistence.*;
 
@@ -22,6 +22,16 @@ public class User {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(nullable = true, updatable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Column(nullable = true, updatable = false)
+    private String firstName;
+
+    @Column(nullable = true, updatable = false)
+    private String lastName;
 
     public Long getId() {
         return id;
@@ -51,13 +61,41 @@ public class User {
         this.role = role;
     }
 
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", email='" + email.replaceFirst("@.*", "@***") +
-                ", passwordHash='" + passwordHash.substring(0, 10) +
+                ", email='" + email + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
                 ", role=" + role +
+                ", gender=" + gender +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
+
 }

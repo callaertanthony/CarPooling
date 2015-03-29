@@ -1,4 +1,4 @@
-package carpooling.model.security;
+package carpooling.model.account;
 
 /**
  * Created by anthonycallaert on 19/03/15.

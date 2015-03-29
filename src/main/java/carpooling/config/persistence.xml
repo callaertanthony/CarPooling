@@ -6,7 +6,7 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/carpooling</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-      <mapping class="carpooling.model.security.User"/>
+      <mapping class="carpooling.model.account.User"/>
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>

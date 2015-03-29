@@ -1,7 +1,7 @@
 package carpooling.service.currentuser;
 
 import carpooling.model.security.CurrentUser;
-import carpooling.model.security.Role;
+import carpooling.model.account.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

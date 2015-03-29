@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,9 +69,6 @@
 								</li>
 								<li class="divider">
 								</li>
-								<li>
-									<a href="#">One more separated link</a>
-								</li>
 							</ul>
 						</li>
 					</ul>
@@ -80,9 +78,14 @@
 						</div> <button type="submit" class="btn btn-default">Submit</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="#">Link</a>
-						</li>
+						<c:if test="${pageContext.request.userPrincipal != null}">
+							<li>
+								<form action="${pageContext.request.contextPath}/logout" method="post">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+									<button type="submit">Log out</button>
+								</form>
+							</li>
+						</c:if>
 						<li class="dropdown">
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">

@@ -1,5 +1,7 @@
 package carpooling.model.security;
 
+import carpooling.model.account.Role;
+import carpooling.model.account.User;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 public class CurrentUser extends org.springframework.security.core.userdetails.User {
