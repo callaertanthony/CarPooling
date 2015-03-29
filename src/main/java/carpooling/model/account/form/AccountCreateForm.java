@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by anthonycallaert on 27/03/15.
  */
-public class CreateAccountForm {
+public class AccountCreateForm {
     @NotEmpty
     private String email = "";
 

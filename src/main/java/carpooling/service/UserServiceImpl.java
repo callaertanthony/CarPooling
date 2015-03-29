@@ -2,7 +2,8 @@ package carpooling.service;
 
 import carpooling.model.account.Role;
 import carpooling.model.account.User;
-import carpooling.model.account.form.CreateAccountForm;
+import carpooling.model.account.form.AccountCreateForm;
+import carpooling.model.account.form.AccountModifyForm;
 import carpooling.model.security.form.UserCrudCreateForm;
 import carpooling.repository.UserRepository;
 import org.slf4j.Logger;
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createAccount(CreateAccountForm form) {
+    public User createAccount(AccountCreateForm form) {
         User user = new User();
         user.setEmail(form.getEmail());
         user.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
@@ -65,6 +66,12 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(form.getFirstName());
         user.setLastName(form.getLastName());
         user.setGender(form.getGender());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User modifyAccount(AccountModifyForm form, User user) {
+        user.setEmail(form.getEmail());
         return userRepository.save(user);
     }
 
