@@ -1,7 +1,7 @@
 package carpooling.controller.Crud;
 
-import carpooling.model.security.form.UserCreateForm;
-import carpooling.model.security.form.UserCreateFormValidator;
+import carpooling.model.security.form.UserCrudCreateForm;
+import carpooling.model.security.form.UserCrudCreateFormValidator;
 import carpooling.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,17 +25,17 @@ import java.util.NoSuchElementException;
 public class UserCrudController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserCrudController.class);
     private final UserService userService;
-    private final UserCreateFormValidator userCreateFormValidator;
+    private final UserCrudCreateFormValidator userCrudCreateFormValidator;
 
     @Autowired
-    public UserCrudController(UserService userService, UserCreateFormValidator userCreateFormValidator) {
+    public UserCrudController(UserService userService, UserCrudCreateFormValidator userCrudCreateFormValidator) {
         this.userService = userService;
-        this.userCreateFormValidator = userCreateFormValidator;
+        this.userCrudCreateFormValidator = userCrudCreateFormValidator;
     }
 
     @InitBinder("form")
     public void initBinder(WebDataBinder binder) {
-        binder.addValidators(userCreateFormValidator);
+        binder.addValidators(userCrudCreateFormValidator);
     }
 
     @PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
@@ -50,19 +50,19 @@ public class UserCrudController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView getUserCreatePage() {
         LOGGER.debug("Getting user create form");
-        return new ModelAndView("crud/user/create", "form", new UserCreateForm());
+        return new ModelAndView("crud/user/create", "form", new UserCrudCreateForm());
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
+    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCrudCreateForm form, BindingResult bindingResult) {
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {
             // failed validation
             return "crud/user/create";
         }
         try {
-            userService.create(form);
+            userService.createUser(form);
         } catch (DataIntegrityViolationException e) {
             // probably email already exists - very rare case when multiple admins are adding same user
             // at the same time and form validation has passed for more than one of them.
@@ -71,6 +71,12 @@ public class UserCrudController {
             return "crud/user/create";
         }
         // ok, redirect
-        return "redirect:/user/list";
+        return "redirect:/crud/user/list";
+    }
+
+    @RequestMapping("/list")
+    public ModelAndView getUsersPage() {
+        LOGGER.debug("Getting users page");
+        return new ModelAndView("crud/user/list", "users", userService.getAllUsers());
     }
 }
