@@ -38,36 +38,10 @@
 </head>
 
 <body>
-<!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><b>Carpooling</b></a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <c:choose>
-                    <c:when test="${pageContext.request.userPrincipal != null}">
-                        <form:form action="${pageContext.request.contextPath}/logout" method="post" class="form-inline left">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  class="form-control"/>
-                            <button type="submit" class="submitLink">Se déconnecter</button>
-                        </form:form>
-                    </c:when>
-                    <c:otherwise>
-                        <li><a href="${pageContext.request.contextPath}/login">Se connecter?</a></li>
-                    </c:otherwise>
-                </c:choose>
-
-                <li><a href="${pageContext.request.contextPath}/register">S'enregister?</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
+<!------------------------------------------------
+                HEADER NAVBAR
+------------------------------------------------>
+<jsp:include page="navbar.jsp" />
 
 <div id="headerwrap">
     <div class="container">

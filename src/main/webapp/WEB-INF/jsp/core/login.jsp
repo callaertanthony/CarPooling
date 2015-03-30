@@ -29,25 +29,10 @@
 
 <body>
 
-<!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><b>Carpooling</b></a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/">Accueil</a></li>
-                <li><a href="${pageContext.request.contextPath}/register">S'enregister</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
+<!------------------------------------------------
+                HEADER NAVBAR
+------------------------------------------------>
+<jsp:include page="navbar.jsp" />
 
 <div id="headerwrap">
     <div class="container">
@@ -58,19 +43,32 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" name="email" id="email" required autofocus class="form-control" />
+                        <label for="email" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="email" id="email" required autofocus class="form-control" />
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" required class="form-control"/>
-                    </div class="form-group">
-                    <div >
-                        <label for="remember-me">Remember me</label>
-                        <input type="checkbox" name="remember-me" id="remember-me"/>
+                        <label for="password" class="col-sm-2 control-label">Mot de passe</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password" id="password" required class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="remember-me" id="remember-me"/> Remember me
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-warning btn-lg">Sign in</button>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning btn-lg">Sign in</button>
+                        </div>
+                    </div>
                 </form:form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
