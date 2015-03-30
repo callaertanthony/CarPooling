@@ -32,14 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/crud/**").hasAuthority("ADMIN")
-                //.anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .and().formLogin().loginPage("/login").failureUrl("/login?error").usernameParameter("email").permitAll()
+                .and().logout().logoutUrl("/logout").deleteCookies("remember-me").logoutSuccessUrl("/home").permitAll()
+                .and().rememberMe();
     }
 
     @Override

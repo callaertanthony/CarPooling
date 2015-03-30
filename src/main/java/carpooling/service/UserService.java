@@ -1,7 +1,8 @@
 package carpooling.service;
 
-import carpooling.model.security.User;
-import carpooling.model.security.form.UserCreateForm;
+import carpooling.model.account.User;
+import carpooling.model.account.form.CreateAccountForm;
+import carpooling.model.security.form.UserCrudCreateForm;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -16,5 +17,7 @@ public interface UserService {
 
     Collection<User> getAllUsers();
 
-    User create(UserCreateForm form);
+    User createUser(UserCrudCreateForm form);
+
+    User createAccount(CreateAccountForm form);
 }

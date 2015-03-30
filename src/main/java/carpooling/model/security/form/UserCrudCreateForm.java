@@ -1,6 +1,6 @@
 package carpooling.model.security.form;
 
-import carpooling.model.security.Role;
+import carpooling.model.account.Role;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by anthonycallaert on 19/03/15.
  */
-public class UserCreateForm {
+public class UserCrudCreateForm {
 
     @NotEmpty
     private String email = "";

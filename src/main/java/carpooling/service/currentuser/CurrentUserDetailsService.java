@@ -1,7 +1,7 @@
 package carpooling.service.currentuser;
 
 import carpooling.model.security.CurrentUser;
-import carpooling.model.security.User;
+import carpooling.model.account.User;
 import carpooling.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

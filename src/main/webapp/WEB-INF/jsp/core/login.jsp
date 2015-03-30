@@ -53,15 +53,24 @@
         <div class="row">
             <div class="col-lg-6">
                 <h1>Se connecter<br/></h1>
-                <form class="form-inline" role="form">
+                <form:form action="${pageContext.request.contextPath}/login" method="post" modelAttribute="error" class="form-inline" role="form">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        <label for="email">Email address</label>
+                        <input type="email" name="email" id="email" required autofocus class="form-control" />
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe ">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" required class="form-control"/>
+                    </div class="form-group">
+                    <div >
+                        <label for="remember-me">Remember me</label>
+                        <input type="checkbox" name="remember-me" id="remember-me"/>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Me connecter!</button>
-                </form>
+
+                    <button type="submit" class="btn btn-warning btn-lg">Sign in</button>
+                </form:form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
                 <img class="img-responsive" src="img/Logo_carpool.png" alt="">
