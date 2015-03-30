@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,18 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/login">Se connecter?</a></li>
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal != null}">
+                        <form:form action="${pageContext.request.contextPath}/logout" method="post" class="form-inline left">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  class="form-control"/>
+                            <button type="submit" class="submitLink">Se déconnecter</button>
+                        </form:form>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${pageContext.request.contextPath}/login">Se connecter?</a></li>
+                    </c:otherwise>
+                </c:choose>
+
                 <li><a href="${pageContext.request.contextPath}/register">S'enregister?</a></li>
             </ul>
         </div><!--/.nav-collapse -->

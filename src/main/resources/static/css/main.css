@@ -124,6 +124,9 @@ html {
     height: 100%
 }
 
+.left {
+    float: left;
+}
 
 /* HeaderWrap */
 #headerwrap {
@@ -152,4 +155,19 @@ html {
 	font-size: 45px;
 	font-weight: 300;
 	letter-spacing: 1px;
+}
+
+
+/* Form */
+
+.submitLink {
+    position: relative;
+    padding: 10px 15px;
+    display: block;
+    line-height: 20px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
 }
