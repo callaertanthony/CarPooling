@@ -14,4 +14,22 @@ public class HomeController {
     public ModelAndView welcome(){
         return new ModelAndView("core/index");
     }
+
+    //Demande de la page d'authentification
+    @RequestMapping("/login")
+    public ModelAndView userLogin() {
+        return new ModelAndView(("core/login"));
+    }
+
+    //Demande de la page d'inscription
+    @RequestMapping("/register")
+    public ModelAndView userRegister() {
+        return new ModelAndView(("core/register"));
+    }
+
+    //Demande de la page permettant à l'utilisateur de proposer un trajet
+    @RequestMapping("/publish")
+    public ModelAndView createNewJourney() {
+        return new ModelAndView(("core/publish"));
+    }
 }
