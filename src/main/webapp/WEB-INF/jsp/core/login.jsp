@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <h1>Se connecter<br/></h1>
-                <form:form action="${pageContext.request.contextPath}/login" method="post" modelAttribute="error" class="form-inline" role="form">
+                <form:form action="${pageContext.request.contextPath}/login" method="post" modelAttribute="error" class="form-horizontal" role="form">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
                     <div class="form-group">
