@@ -159,3 +159,8 @@ html {
     color: white;
     background-color: transparent;
 }
+
+/* Text */
+table > tr > td .textWhite, .textWhite {
+    color: white;
+}

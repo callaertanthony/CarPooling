@@ -26,7 +26,7 @@
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  class="form-control"/>
                             <button type="submit" class="submitLink">Se déconnecter</button>
                         </form:form>
-                        <li><a href="${pageContext.request.contextPath}/account">Mon compte</a></li>
+                        <li><a href="${pageContext.request.contextPath}/account/view/${user.getId()}">Mon compte</a></li>
                     </c:when>
                     <c:otherwise>
                         <li><a href="${pageContext.request.contextPath}/login">Se connecter?</a></li>
