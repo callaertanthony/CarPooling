@@ -3,6 +3,7 @@ package carpooling.service;
 import carpooling.model.account.User;
 import carpooling.model.account.form.CreateAccountForm;
 import carpooling.model.security.form.UserCrudCreateForm;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Collection;
 import java.util.Optional;

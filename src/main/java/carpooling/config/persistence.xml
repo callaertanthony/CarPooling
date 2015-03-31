@@ -7,7 +7,10 @@
     <property name="connection.url">jdbc:mysql://localhost:3306/carpooling</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
       <mapping class="carpooling.model.account.User"/>
-      <!-- DB schema will be updated if needed -->
+      <mapping class="carpooling.model.journey.Journey"/>
+      <mapping class="carpooling.model.journey.Step"/>
+      <mapping class="carpooling.model.journey.City"/>
+    <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>
