@@ -42,16 +42,16 @@
 <div id="headerwrap">
     <div class="container">
 
-        <!-- Display the profil picture or the default picture if user doesn't have any -->
+        <!-- Display the profile picture or the default picture if user doesn't have any -->
         <c:choose>
-            <c:when test="${userSeen.getPicturePath() != null }">
+            <c:when test="${not empty userSeen.getPicturePath()}">
                 <img src="../../users/photos/${userSeen.getPicturePath()}" alt="profil photo" class="img-circle pull-right"/>
             </c:when>
             <c:otherwise>
                 <img src="../../users/photos/man.gif" alt="profil photo" class="img-circle pull-right"/>
             </c:otherwise>
         </c:choose>
-        <!-- Lookng if the profil visualised is the profil of our currently logged user -->
+        <!-- Lookng if the profile visualised is the profile of our currently logged user -->
         <c:choose>
             <c:when test="${userSeen.getId() == userConnected.getId()}">
                 <h1>Votre profil:</h1>
@@ -61,21 +61,9 @@
             </c:otherwise>
         </c:choose>
 
-        <h2 class="text-center">"${userSeen.getFirstName()} ${userSeen.getLastName()}".</h2>
+        <h2 class="">${userSeen.getFirstName()} ${userSeen.getLastName()}</h2>
 
         <table class="table textWhite">
-            <tr>
-                <td>Identifiant: </td>
-                <td>${userSeen.getId()}</td>
-            </tr>
-            <tr>
-                <td>Prénom: </td>
-                <td>${userSeen.getFirstName()}</td>
-            </tr>
-            <tr>
-                <td>Nom: </td>
-                <td>${userSeen.getLastName()}</td>
-            </tr>
             <tr>
                 <td>Email: </td>
                 <td>${userSeen.getEmail()}</td>
@@ -86,7 +74,7 @@
             </tr>
 
         </table>
-        <!-- If the profil is owned by the connected user, allow edition & remove -->
+        <!-- If the profile is owned by the connected user, allow edition & remove -->
         <c:if test="${userSeen.getId() == userConnected.getId()}">
         <div style="text-align:center;">
             <div class="btn-group" role="group" style="text-align: center;">
