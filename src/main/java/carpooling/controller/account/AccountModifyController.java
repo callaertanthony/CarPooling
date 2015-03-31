@@ -74,8 +74,7 @@ public class AccountModifyController {
             LOGGER.warn("Exception occurred when trying to save the user", e);
             return "account/modify";
         }
-
-        //TODO redirect to success account modified page
-        return "redirect:/home";
+        
+        return "redirect:/account/view/"+user.getId();
     }
 }
