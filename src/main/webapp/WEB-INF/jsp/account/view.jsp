@@ -41,53 +41,64 @@
 
 <div id="headerwrap">
     <div class="container">
-        <div>
-            <c:choose>
-                <c:when test="${user.getPicturePath() != null }">
-                    <img src="../../users/photos/${user.getPicturePath()}" alt="profil photo" class="img-circle pull-right"/>
-                </c:when>
-                <c:otherwise>
-                    <img src="../../users/photos/man.gif" alt="profil photo" class="img-circle pull-right"/>
-                </c:otherwise>
-            </c:choose>
-            <br />
-        </div>
-        <h1 class="text-center">Votre profil</h1>
-        <h2 class="text-center">"${user.getFirstName()} ${user.getLastName()}".</h2>
+
+        <!-- Display the profil picture or the default picture if user doesn't have any -->
+        <c:choose>
+            <c:when test="${userSeen.getPicturePath() != null }">
+                <img src="../../users/photos/${userSeen.getPicturePath()}" alt="profil photo" class="img-circle pull-right"/>
+            </c:when>
+            <c:otherwise>
+                <img src="../../users/photos/man.gif" alt="profil photo" class="img-circle pull-right"/>
+            </c:otherwise>
+        </c:choose>
+        <!-- Lookng if the profil visualised is the profil of our currently logged user -->
+        <c:choose>
+            <c:when test="${userSeen.getId() == userConnected.getId()}">
+                <h1>Votre profil:</h1>
+            </c:when>
+            <c:otherwise>
+                    <h1>Profil de:</h1>
+            </c:otherwise>
+        </c:choose>
+
+        <h2 class="text-center">"${userSeen.getFirstName()} ${userSeen.getLastName()}".</h2>
 
         <table class="table textWhite">
             <tr>
-                <td>Id : </td>
-                <td>${user.getId()}</td>
+                <td>Identifiant: </td>
+                <td>${userSeen.getId()}</td>
             </tr>
             <tr>
                 <td>Prénom: </td>
-                <td>${user.getFirstName()}</td>
+                <td>${userSeen.getFirstName()}</td>
             </tr>
             <tr>
-                <td>Nom : </td>
-                <td>${user.getLastName()}</td>
+                <td>Nom: </td>
+                <td>${userSeen.getLastName()}</td>
             </tr>
             <tr>
-                <td>Email : </td>
-                <td>${user.getEmail()}</td>
+                <td>Email: </td>
+                <td>${userSeen.getEmail()}</td>
             </tr>
             <tr>
-                <td>Gender : </td>
-                <td>${user.getGender()}</td>
+                <td>Sexe: </td>
+                <td>${userSeen.getGender()}</td>
             </tr>
 
         </table>
+        <!-- If the profil is owned by the connected user, allow edition & remove -->
+        <c:if test="${userSeen.getId() == userConnected.getId()}">
         <div style="text-align:center;">
             <div class="btn-group" role="group" style="text-align: center;">
-                <a href="<c:url value="/account/edit/${user.getId() }"/>">
-                    <button type="button" class="btn btn-default">Edit</button>
+                <a href="<c:url value="/account/edit/${userConnected.getId() }"/>">
+                    <button type="button" class="btn btn-default">Modifier</button>
                 </a>
-                <a href="<c:url value="/account/remove/${user.getId() }"/>">
-                    <button type="button" class="btn btn-default">Remove</button>
+                <a href="<c:url value="/account/remove/${userConnected.getId() }"/>">
+                    <button type="button" class="btn btn-default">Supprimer</button>
                 </a>
             </div>
         </div>
+        </c:if>
     </div>
 </div><!-- /headerwrap -->
 

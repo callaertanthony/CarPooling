@@ -1,14 +1,19 @@
 package carpooling.controller.account;
 
+import carpooling.controller.core.CurrentUserControllerAdvice;
+import carpooling.model.account.User;
+import carpooling.model.security.CurrentUser;
 import carpooling.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
 
 /**
@@ -27,10 +32,20 @@ public class AccountViewController {
     }
 
     @RequestMapping("/view/{id}")
-    public ModelAndView getUserPage(@PathVariable Long id){
-        LOGGER.debug("Getting profil page for user {}", id);
-        return new ModelAndView("account/view", "user", userService.getUserById(id)
+    public ModelAndView getUserPage(@PathVariable Long id, HttpServletRequest httpServletRequest){
+        ModelAndView modelAndView = new ModelAndView("account/view");
+        modelAndView.addObject("userSeen", userService.getUserById(id)
                 .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
+
+        //Looking if an user is connected. If yes, return him as an object to the JSP
+        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
+        if(null != auth)
+        {
+            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
+            User user = currentUser.getUser();
+            modelAndView.addObject("userConnected", user);
+        }
+        return modelAndView;
     }
 
 }
