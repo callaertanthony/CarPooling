@@ -98,4 +98,14 @@ public class User {
                 '}';
     }
 
+    @Basic
+    private String picturePath;
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
 }
