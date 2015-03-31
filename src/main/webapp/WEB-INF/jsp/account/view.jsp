@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -71,6 +73,24 @@
             <tr>
                 <td>Sexe: </td>
                 <td>${userSeen.getGender()}</td>
+            </tr>
+            <tr>
+                <td>Note du profil: </td>
+                <td>
+                    <c:set var="average" value="0"/>
+                    <c:forEach items="${userSeen.getNote()}" var="item">
+                        <c:set var="average" value="${average+item.note}"/>
+                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${average<='0'}">
+                            <p>0/5</p>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="average" value="${average / fn:length(userSeen.getNote())}"/>
+                            <p><fmt:formatNumber value="${average}" maxFractionDigits="2"/>/5</p>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
             </tr>
 
         </table>

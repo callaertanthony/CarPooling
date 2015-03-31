@@ -1,6 +1,7 @@
 package carpooling.model.account;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by anthonycallaert on 19/03/15.
@@ -107,5 +108,16 @@ public class User {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
+    }
+
+    @ManyToMany
+    private Collection<Note> note;
+
+    public Collection<Note> getNote() {
+        return note;
+    }
+
+    public void setNote(Collection<Note> note) {
+        this.note = note;
     }
 }
