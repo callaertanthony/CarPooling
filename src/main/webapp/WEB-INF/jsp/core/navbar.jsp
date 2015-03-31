@@ -22,16 +22,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>
                     <c:when test="${null != userConnected}">
-                        <form:form action="${pageContext.request.contextPath}/logout" method="post" class="form-inline left">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  class="form-control"/>
-                            <button type="submit" class="submitLink">Se déconnecter</button>
-                        </form:form>
-                        <li><a href="${pageContext.request.contextPath}/account/view/${userConnected.getId()}">Mon compte</a></li>
+                        <li>
+                            <form:form action="${pageContext.request.contextPath}/logout" method="post" class="form-inline left">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  class="form-control"/>
+                                <button type="submit" class="submitLink">Se déconnecter</button>
+                            </form:form>
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/account/view/${userConnected.getId()}">Mon compte (${userConnected.getFirstName()} ${userConnected.getLastName()})</a></li>
                     </c:when>
                     <c:otherwise>
                         <li><a href="${pageContext.request.contextPath}/login">Se connecter?</a></li>
                         <li><a href="${pageContext.request.contextPath}/account/create">S'enregistrer?</a></li>
-
                     </c:otherwise>
                 </c:choose>
 
