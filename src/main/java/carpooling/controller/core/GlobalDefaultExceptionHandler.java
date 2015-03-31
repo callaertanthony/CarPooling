@@ -1,6 +1,9 @@
 package carpooling.controller.core;
 
+import carpooling.model.account.User;
+import carpooling.model.security.CurrentUser;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,7 +23,7 @@ public class GlobalDefaultExceptionHandler {
     public static final String DEFAULT_ERROR_VIEW = "core/error";
 
     @ExceptionHandler(value = Exception.class)
-    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+    public ModelAndView defaultErrorHandler(HttpServletRequest httpServletRequest, Exception e) throws Exception {
         // If the exception is annotated with @ResponseStatus rethrow it and let
         // the framework handle it - like the OrderNotFoundException example
         // at the start of this post.
@@ -31,8 +34,17 @@ public class GlobalDefaultExceptionHandler {
         // Otherwise setup and send the user to a default error-view.
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("exception", e);
-        modelAndView.addObject("url", req.getRequestURL());
+        modelAndView.addObject("url", httpServletRequest.getRequestURL());
         modelAndView.setViewName(DEFAULT_ERROR_VIEW);
+
+        //Looking if an user is connected. If yes, return him as an object to the JSP
+        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
+        if(null != auth)
+        {
+            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
+            User user = currentUser.getUser();
+            modelAndView.addObject("userConnected", user);
+        }
         return modelAndView;
     }
 }
