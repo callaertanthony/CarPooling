@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h1>Ooops, une erreur à eu lieu.<br/></h1>
+                <h1>Ooops, une erreur a eu lieu.<br/></h1>
                 <c:if test="${null != exception}">
                     <p>
                         ${exception.getMessage()}
