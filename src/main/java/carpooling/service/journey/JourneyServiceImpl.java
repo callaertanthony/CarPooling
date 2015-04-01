@@ -34,7 +34,9 @@ public class JourneyServiceImpl implements JourneyService {
     public Journey createJourney(CreateJourneyForm form) {
         Journey journey = new Journey();
         for(Step s : form.getSteps()){
-            journey.getSteps().add(s);
+            Step step = new Step();
+            step.setCity(s.getCity());
+            journey.addStep(step);
         }
         return journeyRepository.save(journey);
     }

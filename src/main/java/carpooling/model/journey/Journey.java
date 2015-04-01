@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.AutoPopulatingList;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class Journey {
     }
 
     @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
-    private List<Step> steps = new AutoPopulatingList<Step>(Step.class);
+    private List<Step> steps;
 
     public List<Step> getSteps() {
         return steps;
@@ -32,5 +33,15 @@ public class Journey {
 
     public void setSteps(List<Step> steps) {
         this.steps = steps;
+    }
+
+    public void addStep(Step step){
+        if(step != null){
+            if(steps == null){
+                steps = new ArrayList<Step>();
+            }
+            steps.add(step);
+            step.setJourney(this);
+        }
     }
 }

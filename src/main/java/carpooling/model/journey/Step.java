@@ -11,7 +11,7 @@ public class Step {
     @Id
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Journey journey;
 
     @ManyToOne
