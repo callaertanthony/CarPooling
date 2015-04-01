@@ -16,8 +16,10 @@
 ${cities}
   <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <c:forEach var="i" begin="1" end="5">
-        <jsp:include page="step.jsp"/>
+      <c:forEach var="i" begin="1" end="5">
+        <jsp:include page="step.jsp">
+            <jsp:param name="y" value="${i}" />
+        </jsp:include>
     </c:forEach>
     <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
   </form:form>

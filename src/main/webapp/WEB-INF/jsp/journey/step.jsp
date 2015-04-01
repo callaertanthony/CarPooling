@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form:select path="steps[${i}].city">
+<form:select path="steps[${param.y}].city">
   <form:options items="${cities}" itemValue="id" itemLabel="name"/>
 </form:select>
-<form:input path="steps[${i}].date" type="time" required="true"/>
+<form:input path="steps[${param.y}].date" type="time" required="true"/>
