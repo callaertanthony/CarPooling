@@ -12,36 +12,36 @@ import org.springframework.validation.Validator;
  * Created by anthonycallaert on 27/03/15.
  */
 @Component
-public class CreateAccountFormValidator implements Validator {
+public class AccountCreateFormValidator implements Validator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAccountFormValidator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountCreateFormValidator.class);
     private final UserService userService;
 
     @Autowired
-    public CreateAccountFormValidator(UserService userService) {
+    public AccountCreateFormValidator(UserService userService) {
         this.userService = userService;
     }
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return aClass.equals(CreateAccountForm.class);
+        return aClass.equals(AccountCreateForm.class);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
         LOGGER.debug("Validating {}", o);
-        CreateAccountForm form = (CreateAccountForm) o;
+        AccountCreateForm form = (AccountCreateForm) o;
         validatePasswords(errors, form);
         validateEmail(errors, form);
     }
 
-    private void validatePasswords(Errors errors, CreateAccountForm form){
+    private void validatePasswords(Errors errors, AccountCreateForm form){
         if(!form.getPassword().equals(form.getPasswordRepeated())){
             errors.reject("password.no_match", "Password don't match");
         }
     }
 
-    private void validateEmail(Errors errors, CreateAccountForm form){
+    private void validateEmail(Errors errors, AccountCreateForm form){
         if(userService.getUserByEmail(form.getEmail()).isPresent()){
             errors.reject("email.exists", "User with this email already exists");
         }

@@ -1,7 +1,7 @@
 package carpooling.controller.account;
 
-import carpooling.model.account.form.CreateAccountForm;
-import carpooling.model.account.form.CreateAccountFormValidator;
+import carpooling.model.account.form.AccountCreateForm;
+import carpooling.model.account.form.AccountCreateFormValidator;
 import carpooling.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,33 +24,33 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/account")
-public class AccountController {
+public class AccountCreateController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccountController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountCreateController.class);
     private final UserService userService;
-    private final CreateAccountFormValidator createAccountFormValidator;
+    private final AccountCreateFormValidator accountCreateFormValidator;
 
     @Autowired
-    public AccountController(UserService userService, CreateAccountFormValidator createAccountFormValidator) {
+    public AccountCreateController(UserService userService, AccountCreateFormValidator accountCreateFormValidator) {
         this.userService = userService;
-        this.createAccountFormValidator = createAccountFormValidator;
+        this.accountCreateFormValidator = accountCreateFormValidator;
     }
 
-    @InitBinder
+    @InitBinder("form")
     public void initBinder(WebDataBinder binder){
-        binder.addValidators(createAccountFormValidator);
+        binder.addValidators(accountCreateFormValidator);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @PreAuthorize("isAnonymous()")
     public ModelAndView getCreateAccountForAnonymousPage(){
         LOGGER.debug("Getting account create form");
-        return new ModelAndView("/account/create", "form", new CreateAccountForm());
+        return new ModelAndView("/account/create", "form", new AccountCreateForm());
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @PreAuthorize("isAnonymous()")
-    public String handleCreateAccountForm(@Valid @ModelAttribute("form") CreateAccountForm form, BindingResult bindingResult){
+    public String handleCreateAccountForm(@Valid @ModelAttribute("form") AccountCreateForm form, BindingResult bindingResult){
         LOGGER.debug("Processing account create form={}, bindingResult={}", form, bindingResult);
         if(bindingResult.hasErrors()){
             return "account/create";

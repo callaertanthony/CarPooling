@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: anthonycallaert
-  Date: 26/03/15
-  Time: 19:30
+  Date: 30/03/15
+  Time: 00:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Créer un profil</title>
+    <title>Modifier le profil</title>
 
     <link href="../css/bootstrap.css" rel="stylesheet"> <!-- Bootstrap core CSS -->
     <link href="../css/main.css" rel="stylesheet"> <!-- Custom styles for this template -->
@@ -39,25 +39,25 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h1>Créer mon compte<br/></h1>
+                <h1>Modifier mon profil<br/></h1>
                 <form:form name="form" action="" method="post" modelAttribute="form" class="form-horizontal">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="form-group">
                         <form:label for="email" path="email" class="col-sm-4 control-label">Email</form:label>
                         <div class="col-sm-8">
-                            <form:input type="email" name="email" value="${form.email}" id="email" required="true" path="email" class="form-control"/>
+                            <form:input type="email" name="email" id="email" required="true" path="email" class="form-control"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <form:label for="password" path="password" class="col-sm-4 control-label">Mot de passe</form:label>
                         <div class="col-sm-8">
-                            <form:input type="password" name="password" id="password" required="true" path="password" class="form-control"/>
+                            <form:input type="password" name="password" id="password" path="password" class="form-control"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <form:label for="passwordRepeated" path="passwordRepeated" class="col-sm-4 control-label">Confirmer</form:label>
                         <div class="col-sm-8">
-                            <form:input type="password" name="passwordRepeated" id="passwordRepeated" required="true" path="passwordRepeated" class="form-control"/>
+                            <form:input type="password" name="passwordRepeated" id="passwordRepeated" path="passwordRepeated" class="form-control"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,7 +88,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-warning btn-lg">Créer le compte</button>
+                            <button type="submit" class="btn btn-warning btn-lg">Mettre à jours mon profil</button>
                         </div>
                     </div>
                 </form:form>

@@ -1,7 +1,8 @@
 package carpooling.service;
 
 import carpooling.model.account.User;
-import carpooling.model.account.form.CreateAccountForm;
+import carpooling.model.account.form.AccountCreateForm;
+import carpooling.model.account.form.AccountModifyForm;
 import carpooling.model.security.form.UserCrudCreateForm;
 import org.springframework.context.annotation.Bean;
 
@@ -20,5 +21,7 @@ public interface UserService {
 
     User createUser(UserCrudCreateForm form);
 
-    User createAccount(CreateAccountForm form);
+    User createAccount(AccountCreateForm form);
+
+    User modifyAccount(AccountModifyForm form, User user);
 }

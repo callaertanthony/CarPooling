@@ -1,36 +1,26 @@
-package carpooling.model.security.form;
+package carpooling.model.account.form;
 
 import carpooling.model.account.Gender;
-import carpooling.model.account.Role;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Created by anthonycallaert on 19/03/15.
+ * Created by anthonycallaert on 29/03/15.
  */
-public class UserCrudCreateForm {
+public class AccountModifyForm {
 
     @NotEmpty
     private String email = "";
 
-    @NotEmpty
     private String password = "";
 
-    @NotEmpty
     private String passwordRepeated = "";
 
-    @NotEmpty
     private String firstName = "";
 
-    @NotEmpty
     private String lastName = "";
 
-    @NotNull
     private Gender gender = Gender.MAN;
-
-    @NotNull
-    private Role role = Role.MEMBER;
 
     public String getEmail() {
         return email;
@@ -80,24 +70,32 @@ public class UserCrudCreateForm {
         this.gender = gender;
     }
 
-    public Role getRole() {
-        return role;
+
+    public AccountModifyForm() {
+        this.email = "";
+        this.password = "";
+        this.passwordRepeated = "";
+        this.firstName = "";
+        this.lastName = "";
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+
+    public AccountModifyForm(String email, String firstName, String lastName, Gender gender) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
     }
 
     @Override
     public String toString() {
-        return "UserCreateForm{" +
-                "email='" + email.replaceFirst("@.+", "@***") + '\'' +
-                ", password=***" + '\'' +
-                ", passwordRepeated=***" + '\'' +
+        return "AccountModifyForm{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordRepeated='" + passwordRepeated + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
-                ", role=" + role +
                 '}';
     }
 }

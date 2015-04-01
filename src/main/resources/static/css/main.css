@@ -159,3 +159,8 @@ html {
     color: white;
     background-color: transparent;
 }
+
+/* Text */
+table, td > a, td > a span, .textWhite {
+    color: white;
+}
