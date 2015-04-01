@@ -12,5 +12,6 @@
 </head>
 <body>
   L'id du trajet : ${journey.getId()}
+  Ses étapes : ${journey.steps}
 </body>
 </html>

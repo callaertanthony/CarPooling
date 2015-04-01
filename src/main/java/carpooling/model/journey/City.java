@@ -16,6 +16,7 @@ public class City {
     private Set<Step> steps;
 
     @Basic
+    @Column(nullable = false, unique = true)
     private String name;
 
     public long getId() {

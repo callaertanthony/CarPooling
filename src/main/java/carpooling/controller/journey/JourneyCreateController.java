@@ -3,8 +3,10 @@ package carpooling.controller.journey;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.form.CreateJourneyForm;
 import carpooling.model.journey.form.CreateJourneyFormValidator;
+import carpooling.repository.CityRepository;
 import carpooling.repository.JourneyRepository;
 import carpooling.service.journey.JourneyService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +30,18 @@ import javax.validation.Valid;
 @RequestMapping("/journey")
 public class JourneyCreateController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(JourneyCreateController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JourneyCreateController.class);
     private final JourneyService journeyService;
     private final CreateJourneyFormValidator createJourneyFormValidator;
+    //TODO change for a service
+    private final CityRepository cityRepository;
 
     @Autowired
-    public JourneyCreateController(JourneyService journeyService, CreateJourneyFormValidator createJourneyFormValidator) {
+    public JourneyCreateController(JourneyService journeyService,
+                                   CreateJourneyFormValidator createJourneyFormValidator, CityRepository cityRepository) {
         this.journeyService = journeyService;
         this.createJourneyFormValidator = createJourneyFormValidator;
+        this.cityRepository = cityRepository;
     }
 
     @InitBinder("journeyForm")
@@ -47,7 +53,10 @@ public class JourneyCreateController {
     @PreAuthorize("isAuthenticated()")
     public ModelAndView getCreateJourneyForm(){
         LOGGER.debug("Getting create journey page");
-        return new ModelAndView("journey/create", "journeyForm", new CreateJourneyForm());
+        ModelAndView mvn = new ModelAndView("journey/create");
+        mvn.addObject("cities", cityRepository.findAll());
+        mvn.addObject("journeyForm", new CreateJourneyForm());
+        return mvn;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

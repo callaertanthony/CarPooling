@@ -31,7 +31,7 @@ public class JourneyViewController {
     public ModelAndView getJourneyPage(@PathVariable Integer id){
         ModelAndView mvn = new ModelAndView("journey/view");
         mvn.addObject("journey", journeyService.getJourneyById(id)
-            .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
+            .orElseThrow(() -> new NoSuchElementException(String.format("Journey=%s not found", id))));
         return mvn;
     }
 }

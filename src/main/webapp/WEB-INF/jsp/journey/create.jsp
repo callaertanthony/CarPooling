@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: anthonycallaert
@@ -12,9 +13,14 @@
     <title>create journey</title>
 </head>
 <body>
+${cities}
   <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
+    <c:forEach var="i" begin="1" end="5">
+      <form:select path="steps[${i}].city">
+        <form:options items="${cities}" itemValue="id" itemLabel="name"/>
+      </form:select>
+    </c:forEach>
     <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
   </form:form>
 </body>

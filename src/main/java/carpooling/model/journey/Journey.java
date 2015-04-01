@@ -1,13 +1,10 @@
 package carpooling.model.journey;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.AutoPopulatingList;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by anthonycallaert on 31/03/15.
@@ -26,14 +23,14 @@ public class Journey {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "journey")
-    private ArrayList<Step> steps;
+    @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
+    private List<Step> steps = new AutoPopulatingList<Step>(Step.class);
 
-    public ArrayList<Step> getSteps() {
+    public List<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(ArrayList<Step> steps) {
+    public void setSteps(List<Step> steps) {
         this.steps = steps;
     }
 }
