@@ -7,3 +7,8 @@ VALUES
 ('Paris'),
 ('Marseille'),
 ('Lyon');
+
+INSERT INTO `step` (`id`, `date`, `city_id`, `journey_id`) VALUES
+  (1, '2015-04-02 00:00:00', 1, 1),
+  (2, '2015-04-03 08:42:53', 2, 1),
+  (3, '2015-04-23 09:43:31', 4, 1);
