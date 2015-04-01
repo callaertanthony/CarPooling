@@ -21,13 +21,13 @@
 
     <title>Détail du trajet</title>
 
-    <link href="../../css/bootstrap.css" rel="stylesheet">  <!-- Bootstrap core CSS -->
-    <link href="../../css/main.css" rel="stylesheet">       <!-- Custom styles for this template -->
-    <link href="../../css/timeline.css" rel="stylesheet">  <!-- Custom style for the timeline -->
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">  <!-- Bootstrap core CSS -->
+    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">       <!-- Custom styles for this template -->
+    <link href="${pageContext.request.contextPath}/css/timeline.css" rel="stylesheet">  <!-- Custom style for the timeline -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="../../js/html5shiv.js"></script>
+    <script src="${pageContext.request.contextPath}/js/html5shiv.js"></script>
     <![endif]-->
 </head>
 
@@ -92,8 +92,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="../../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../js/scripts.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
 </body>
 </html>

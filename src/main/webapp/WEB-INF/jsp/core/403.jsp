@@ -19,13 +19,13 @@
     <title>Halte-là!</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="../../css/main.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="../../js/html5shiv.js"></script>
+    <script src="${pageContext.request.contextPath}/js/html5shiv.js"></script>
     <![endif]-->
 
 </head>
@@ -44,7 +44,7 @@
                 <a href="/" class="btn btn-warning btn-lg" role="button">Me ramener à la route connue la plus proche.</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="../../img/Logo_carpool.png" alt="">
+                <img class="img-responsive" src="${pageContext.request.contextPath}/img/Logo_carpool.png" alt="">
             </div><!-- /col-lg-6 -->
         </div><!-- /row -->
     </div><!-- /container -->
@@ -53,8 +53,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="../../js/jquery.min.js"></script>
-<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../js/scripts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
 </body>
 </html>

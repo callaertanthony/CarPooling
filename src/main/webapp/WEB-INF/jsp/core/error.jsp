@@ -19,18 +19,18 @@
     <title>Oops..</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="../../css/main.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="../../js/html5shiv.js"></script>
+    <script src="${pageContext.request.contextPath}/js/html5shiv.js"></script>
     <![endif]-->
 
-    <script type="text/javascript" src="../../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../js/scripts.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
 </head>
 
 <body>
@@ -52,7 +52,7 @@
                 <a href="${pageContext.request.contextPath}/" class="btn btn-warning btn-lg" role="button">Me ramener en lieu sûr!</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="${pageContext.request.contextPath}/../../img/Logo_carpool.png" alt="">
+                <img class="img-responsive" src="${pageContext.request.contextPath}/${pageContext.request.contextPath}/img/Logo_carpool.png" alt="">
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->
@@ -63,6 +63,6 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>
