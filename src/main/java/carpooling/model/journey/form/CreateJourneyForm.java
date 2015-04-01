@@ -10,7 +10,7 @@ import java.util.List;
  * Created by anthonycallaert on 31/03/15.
  */
 public class CreateJourneyForm {
-    private List<Step> steps = new ArrayList<Step>();
+    private List<Step> steps = new AutoPopulatingList<Step>(Step.class);
 
     public List<Step> getSteps() {
         return steps;

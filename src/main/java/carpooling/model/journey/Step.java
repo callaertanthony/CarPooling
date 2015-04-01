@@ -1,6 +1,9 @@
 package carpooling.model.journey;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Calendar;
 
 /**
  * Created by anthonycallaert on 31/03/15.
@@ -16,6 +19,9 @@ public class Step {
 
     @ManyToOne
     private City city;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Calendar date;
 
     public long getId() {
         return id;
@@ -39,5 +45,13 @@ public class Step {
 
     public void setJourney(Journey journey) {
         this.journey = journey;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 }

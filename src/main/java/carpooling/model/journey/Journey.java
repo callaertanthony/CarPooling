@@ -32,7 +32,9 @@ public class Journey {
     }
 
     public void setSteps(List<Step> steps) {
-        this.steps = steps;
+        for (Step step : steps){
+            this.addStep(step);
+        }
     }
 
     public void addStep(Step step){
