@@ -52,7 +52,7 @@
                 <a href="${pageContext.request.contextPath}/" class="btn btn-warning btn-lg" role="button">Me ramener en lieu sûr!</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="${pageContext.request.contextPath}/${pageContext.request.contextPath}/img/Logo_carpool.png" alt="">
+                <img class="img-responsive" src="${pageContext.request.contextPath}/img/Logo_carpool-unhappy.png" alt="">
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->
