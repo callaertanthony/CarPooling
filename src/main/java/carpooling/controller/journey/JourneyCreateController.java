@@ -1,6 +1,7 @@
 package carpooling.controller.journey;
 
 import carpooling.model.journey.Journey;
+import carpooling.model.journey.Step;
 import carpooling.model.journey.form.CreateJourneyForm;
 import carpooling.model.journey.form.CreateJourneyFormValidator;
 import carpooling.repository.CityRepository;
@@ -42,6 +43,7 @@ public class JourneyCreateController {
         this.journeyService = journeyService;
         this.createJourneyFormValidator = createJourneyFormValidator;
         this.cityRepository = cityRepository;
+
     }
 
     @InitBinder("journeyForm")
