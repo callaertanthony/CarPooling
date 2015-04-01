@@ -1,12 +1,26 @@
 package carpooling.model.account.form;
 
+import carpooling.model.account.Gender;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by anthonycallaert on 29/03/15.
  */
 public class AccountModifyForm {
-    private String email;
+
+    @NotEmpty
+    private String email = "";
+
+    private String password = "";
+
+    private String passwordRepeated = "";
+
+    private String firstName = "";
+
+    private String lastName = "";
+
+    private Gender gender = Gender.MAN;
 
     public String getEmail() {
         return email;
@@ -16,18 +30,72 @@ public class AccountModifyForm {
         this.email = email;
     }
 
-    public AccountModifyForm() {
-        this.email = "";
+    public String getPassword() {
+        return password;
     }
 
-    public AccountModifyForm(String email) {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordRepeated() {
+        return passwordRepeated;
+    }
+
+    public void setPasswordRepeated(String passwordRepeated) {
+        this.passwordRepeated = passwordRepeated;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+
+    public AccountModifyForm() {
+        this.email = "";
+        this.password = "";
+        this.passwordRepeated = "";
+        this.firstName = "";
+        this.lastName = "";
+    }
+
+
+    public AccountModifyForm(String email, String firstName, String lastName, Gender gender) {
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
     }
 
     @Override
     public String toString() {
         return "AccountModifyForm{" +
                 "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordRepeated='" + passwordRepeated + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
                 '}';
     }
 }

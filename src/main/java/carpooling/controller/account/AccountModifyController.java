@@ -53,8 +53,8 @@ public class AccountModifyController {
         Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
         CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
         User user = currentUser.getUser();
-        String email = user.getEmail();
-        return new ModelAndView("account/modify", "form", new AccountModifyForm(email));
+        return new ModelAndView("account/modify", "form", new AccountModifyForm(user.getEmail(), user.getFirstName(),
+                                                                                user.getLastName(), user.getGender()));
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)

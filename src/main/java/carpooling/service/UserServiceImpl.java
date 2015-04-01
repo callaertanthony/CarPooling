@@ -72,6 +72,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User modifyAccount(AccountModifyForm form, User user) {
         user.setEmail(form.getEmail());
+
+        //If user left empty the password input, keep the old hash
+        if(form.getPassword() == "")
+            user.setPasswordHash(user.getPasswordHash());
+        else
+            user.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
+
+        user.setFirstName(form.getFirstName());
+        user.setLastName(form.getLastName());
+        user.setGender(form.getGender());
         return userRepository.save(user);
     }
 

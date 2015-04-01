@@ -23,14 +23,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(nullable = true, updatable = false)
+    @Column(nullable = true, updatable = true)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = true, updatable = false)
+    @Column(nullable = true, updatable = true)
     private String firstName;
 
-    @Column(nullable = true, updatable = false)
+    @Column(nullable = true, updatable = true)
     private String lastName;
 
     public Long getId() {
