@@ -54,7 +54,6 @@
                             </div>
                         </article>
                     </c:forEach>
-
                     <article class="timeline-entry begin">
                         <div class="timeline-entry-inner">
                             <div class="timeline-icon" style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);">
