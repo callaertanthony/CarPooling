@@ -1,4 +1,3 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +15,9 @@
 
     <!-- Custom styles for this template -->
     <link href="css/main.css" rel="stylesheet">
+
+    <!-- DatePicker -->
+    <link href="css/datepicker.css" rel="stylesheet">
 
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
@@ -38,38 +40,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h1>Se connecter<br/></h1>
-                <form:form action="${pageContext.request.contextPath}/login" method="post" modelAttribute="error" class="form-horizontal" role="form">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
+                <h1>publier un trajet<br/></h1>
+                <form class="form-inline" role="form">
                     <div class="form-group">
-                        <label for="email" class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" name="email" id="email" required autofocus class="form-control" />
-                        </div>
+                        <input type="text" class="form-control" id="from" placeholder="Départ">
                     </div>
                     <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">Mot de passe</label>
-                        <div class="col-sm-10">
-                            <input type="password" name="password" id="password" required class="form-control"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="remember-me" id="remember-me"/> Remember me
-                                </label>
-                            </div>
-                        </div>
+                        <input type="text" class="form-control" id="to" placeholder="Destination">
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-warning btn-lg">Sign in</button>
-                        </div>
+                    <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                        <input class="span2" size="16" type="text" value="12-02-2012">
+                        <span class="add-on"><i class="icon-th"></i></span>
                     </div>
-                </form:form>
+
+                    <button type="submit" class="btn btn-warning btn-lg">Publier!</button>
+                </form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
                 <img class="img-responsive" src="img/Logo_carpool.png" alt="">
@@ -82,8 +68,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="../../js/jquery.min.js"></script>
-<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../js/scripts.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

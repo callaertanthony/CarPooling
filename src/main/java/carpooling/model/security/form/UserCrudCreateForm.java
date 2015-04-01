@@ -1,5 +1,6 @@
 package carpooling.model.security.form;
 
+import carpooling.model.account.Gender;
 import carpooling.model.account.Role;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -18,6 +19,15 @@ public class UserCrudCreateForm {
 
     @NotEmpty
     private String passwordRepeated = "";
+
+    @NotEmpty
+    private String firstName = "";
+
+    @NotEmpty
+    private String lastName = "";
+
+    @NotNull
+    private Gender gender = Gender.MAN;
 
     @NotNull
     private Role role = Role.MEMBER;
@@ -46,6 +56,30 @@ public class UserCrudCreateForm {
         this.passwordRepeated = passwordRepeated;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -60,6 +94,9 @@ public class UserCrudCreateForm {
                 "email='" + email.replaceFirst("@.+", "@***") + '\'' +
                 ", password=***" + '\'' +
                 ", passwordRepeated=***" + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
                 ", role=" + role +
                 '}';
     }
