@@ -78,10 +78,10 @@
         <c:if test="${userSeen.getId() == userConnected.getId()}">
         <div style="text-align:center;">
             <div class="btn-group" role="group" style="text-align: center;">
-                <a href="<c:url value="/account/edit/${userConnected.getId() }"/>">
+                <a href="<c:url value="${pageContext.request.contextPath}/account/edit/${userConnected.getId() }"/>">
                     <button type="button" class="btn btn-default">Modifier</button>
                 </a>
-                <a href="<c:url value="/account/remove/${userConnected.getId() }"/>">
+                <a href="<c:url value="${pageContext.request.contextPath}/account/remove/${userConnected.getId() }"/>">
                     <button type="button" class="btn btn-default">Supprimer</button>
                 </a>
             </div>

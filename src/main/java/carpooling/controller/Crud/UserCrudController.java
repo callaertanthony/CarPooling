@@ -1,5 +1,8 @@
 package carpooling.controller.Crud;
 
+import carpooling.controller.core.CurrentUserControllerAdvice;
+import carpooling.model.account.User;
+import carpooling.model.security.CurrentUser;
 import carpooling.model.security.form.UserCrudCreateForm;
 import carpooling.model.security.form.UserCrudCreateFormValidator;
 import carpooling.service.UserService;
@@ -8,12 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.NoSuchElementException;
 
@@ -48,18 +53,37 @@ public class UserCrudController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView getUserCreatePage() {
+    public ModelAndView getUserCreatePage(HttpServletRequest httpServletRequest) {
         LOGGER.debug("Getting user create form");
-        return new ModelAndView("crud/user/create", "form", new UserCrudCreateForm());
+        ModelAndView modelAndView = new ModelAndView("crud/user/create");
+        //Looking if an user is connected. If yes, return him as an object to the JSP
+        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
+        if(null != auth)
+        {
+            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
+            User user = currentUser.getUser();
+            modelAndView.addObject("userConnected", user);
+        }
+        modelAndView.addObject("form", new UserCrudCreateForm());
+        return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCrudCreateForm form, BindingResult bindingResult) {
+    public ModelAndView handleUserCreateForm(@Valid @ModelAttribute("form") UserCrudCreateForm form, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
+        ModelAndView modelAndView = new ModelAndView("crud/user/create");
+        //Looking if an user is connected. If yes, return him as an object to the JSP
+        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
+        if(null != auth)
+        {
+            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
+            User user = currentUser.getUser();
+            modelAndView.addObject("userConnected", user);
+        }
         if (bindingResult.hasErrors()) {
             // failed validation
-            return "crud/user/create";
+            return modelAndView;
         }
         try {
             userService.createUser(form);
@@ -68,15 +92,26 @@ public class UserCrudController {
             // at the same time and form validation has passed for more than one of them.
             LOGGER.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
             bindingResult.reject("email.exists", "Email already exists");
-            return "crud/user/create";
+            return modelAndView;
         }
         // ok, redirect
-        return "redirect:/crud/user/list";
+        modelAndView.setViewName("redirect:/crud/user/list");
+        return modelAndView;
     }
 
     @RequestMapping("/list")
-    public ModelAndView getUsersPage() {
+    public ModelAndView getUsersPage(HttpServletRequest httpServletRequest) {
         LOGGER.debug("Getting users page");
-        return new ModelAndView("crud/user/list", "users", userService.getAllUsers());
+        ModelAndView modelAndView = new ModelAndView("crud/user/list");
+        //Looking if an user is connected. If yes, return him as an object to the JSP
+        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
+        if(null != auth)
+        {
+            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
+            User user = currentUser.getUser();
+            modelAndView.addObject("userConnected", user);
+        }
+        modelAndView.addObject("users", userService.getAllUsers());
+        return modelAndView;
     }
 }

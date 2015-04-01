@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: anthonycallaert
@@ -8,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +100,7 @@
                 </form:form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="../img/Logo_carpool.png" alt="">
+                <img class="img-responsive" src="${pageContext.request.contextPath}/../img/Logo_carpool.png" alt="">
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->

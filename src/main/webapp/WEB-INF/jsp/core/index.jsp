@@ -25,16 +25,6 @@
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 
-    <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-  <link rel="shortcut icon" href="img/favicon.png">
-
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
 </head>
 
 <body>
@@ -66,7 +56,7 @@
                 </form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="img/Logo_carpool.png" alt="">
+                <img class="img-responsive" src="${pageContext.request.contextPath}/img/Logo_carpool.png" alt="">
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->
@@ -76,7 +66,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/scripts.js"></script>
 </body>
 </html>

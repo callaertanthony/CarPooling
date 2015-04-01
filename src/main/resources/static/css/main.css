@@ -161,6 +161,6 @@ html {
 }
 
 /* Text */
-table > tr > td .textWhite, .textWhite {
+table, td > a, td > a span, .textWhite {
     color: white;
 }
