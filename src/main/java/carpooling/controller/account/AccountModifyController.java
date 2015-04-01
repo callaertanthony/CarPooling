@@ -62,6 +62,7 @@ public class AccountModifyController {
     public String handleAccountModifyForm(@Valid @ModelAttribute("form") AccountModifyForm form, BindingResult bindingResult,
                                           HttpServletRequest httpServletRequest){
         LOGGER.debug("Processing account modify form={}, bindingResult={}", form, bindingResult);
+        //Todo : envoyer un warning si l'adresse rentree est vide
         if(bindingResult.hasErrors()){
             return "account/modify";
         }
@@ -75,7 +76,6 @@ public class AccountModifyController {
             return "account/modify";
         }
 
-        //TODO redirect to success account modified page
-        return "redirect:/home";
+        return "redirect:/account/view/"+user.getId();
     }
 }
