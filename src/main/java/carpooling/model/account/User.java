@@ -1,6 +1,9 @@
 package carpooling.model.account;
 
+import carpooling.model.journey.Journey;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by anthonycallaert on 19/03/15.
@@ -32,6 +35,14 @@ public class User {
 
     @Column(nullable = true, updatable = true)
     private String lastName;
+
+    @Basic
+    private String picturePath;
+
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    private Set<Journey> journeysCreated;
+
+    //TODO passengerJourneys
 
     public Long getId() {
         return id;
@@ -97,9 +108,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
-
-    @Basic
-    private String picturePath;
 
     public String getPicturePath() {
         return picturePath;

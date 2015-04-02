@@ -1,5 +1,6 @@
 package carpooling.service.journey;
 
+import carpooling.model.account.User;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.Step;
 import carpooling.model.journey.form.CreateJourneyForm;
@@ -36,12 +37,15 @@ public class JourneyServiceImpl implements JourneyService {
     }
 
     @Override
-    public Journey createJourney(CreateJourneyForm form) {
+    public Journey createJourney(CreateJourneyForm form, User user) {
         LOGGER.debug("Journey creation with service");
         Journey journey = new Journey();
         Calendar calendar = Calendar.getInstance();
         LocalDate date;
         LocalTime time;
+
+        //set creator
+        journey.setCreator(user);
 
         for(CreateStepForm stepForm : form.getSteps()){
             //create step to populate
