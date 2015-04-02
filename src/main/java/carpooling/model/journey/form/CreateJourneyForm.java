@@ -10,13 +10,13 @@ import java.util.List;
  * Created by anthonycallaert on 31/03/15.
  */
 public class CreateJourneyForm {
-    private List<Step> steps = new AutoPopulatingList<Step>(Step.class);
+    private List<CreateStepForm> steps = new AutoPopulatingList<CreateStepForm>(CreateStepForm.class);
 
-    public List<Step> getSteps() {
+    public List<CreateStepForm> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<Step> steps) {
+    public void setSteps(List<CreateStepForm> steps) {
         this.steps = steps;
     }
 }

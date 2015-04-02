@@ -11,4 +11,5 @@
 <form:select path="steps[${param.y}].city">
   <form:options items="${cities}" itemValue="id" itemLabel="name"/>
 </form:select>
-<form:input path="steps[${param.y}].date" type="time" required="true"/>
+<form:input path="steps[${param.y}].date" type="date" required="true"/>
+<form:input path="steps[${param.y}].time" type="time" required="true"/>

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -52,7 +53,7 @@ public class JourneyCreateController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    @PreAuthorize("isAuthenticated()")
+    //TODO delete comment for release ! @PreAuthorize("isAuthenticated()")
     public ModelAndView getCreateJourneyForm(){
         LOGGER.debug("Getting create journey page");
         ModelAndView mvn = new ModelAndView("journey/create");
@@ -62,18 +63,23 @@ public class JourneyCreateController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @PreAuthorize("isAuthenticated()")
-    public String handleCreateJourneyForm(@Valid @ModelAttribute("journeyForm") CreateJourneyForm journeyForm, BindingResult bindingResult){
+    //TODO delete comment for release ! @PreAuthorize("isAuthenticated()")
+    public ModelAndView handleCreateJourneyForm(@Valid @ModelAttribute("journeyForm") CreateJourneyForm journeyForm, BindingResult bindingResult){
         LOGGER.debug("Processing journey create form={}, bindingResult={}", journeyForm, bindingResult);
+        ModelAndView mvn = new ModelAndView("journey/create");
         if(bindingResult.hasErrors()){
-            return "journey/create";
+            mvn.addObject("journeyForm", journeyForm);
+            mvn.addObject("cities", cityRepository.findAll());
+            return mvn;
         }
         try{
             Journey journey = journeyService.createJourney(journeyForm);
-            return "redirect:/journey/view/" + journey.getId();
+            return new ModelAndView("redirect:/journey/view/" + journey.getId());
         } catch(DataIntegrityViolationException e){
             LOGGER.warn("Exception occurred when trying to save the journey", e);
-            return "journey/create";
+            mvn.addObject("journeyForm", journeyForm);
+            mvn.addObject("cities", cityRepository.findAll());
+            return mvn;
         }
     }
 }

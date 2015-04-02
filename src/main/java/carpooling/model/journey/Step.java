@@ -3,6 +3,7 @@ package carpooling.model.journey;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 /**
@@ -20,8 +21,8 @@ public class Step {
     @ManyToOne
     private City city;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Calendar date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Calendar dateCalendar;
 
     public long getId() {
         return id;
@@ -47,11 +48,11 @@ public class Step {
         this.journey = journey;
     }
 
-    public Calendar getDate() {
-        return date;
+    public Calendar getDateCalendar() {
+        return dateCalendar;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setDateCalendar(Calendar dateCalendar) {
+        this.dateCalendar = dateCalendar;
     }
 }

@@ -40,7 +40,7 @@
             <div class="row col-lg-6">
                 <div class="timeline-centered">
                     <c:forEach items="${journey.getSteps()}" var="step">
-                        <fmt:formatDate value="${step.getDate().getTime()}" var="formattedDate" type="date" pattern="MM-dd-yyyy" />
+                        <fmt:formatDate value="${step.dateCalendar.time}" var="formattedDate" type="both" pattern="MM-dd-yyyy" />
                         <article class="timeline-entry">
                             <div class="timeline-entry-inner">
                                 <time class="timeline-time" datetime="2014-01-10T03:45"><span>${formattedDate}</span></time>

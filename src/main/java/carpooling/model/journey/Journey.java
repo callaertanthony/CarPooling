@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.AutoPopulatingList;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class Journey {
     }
 
     @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
+    @Valid
     private List<Step> steps;
 
     public List<Step> getSteps() {

@@ -39,9 +39,9 @@
 
     <div id="headerwrap">
         <div class="container">
-            <div class="row col-lg-9">
+            <div class="row col-lg-2"></div>
+            <div class="row col-lg-10">
                 <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <div id="user-journey" class="timeline-centered">
 
                     <article class="timeline-entry">
@@ -54,7 +54,24 @@
                                 <form:select path="steps[0].city">
                                     <form:options items="${cities}" itemValue="id" itemLabel="name"/>
                                 </form:select>
-                                <form:input path="steps[0].date" type="time" required="true"/>
+                                <form:input path="steps[0].date" type="date" required="true"/>
+                                <form:input path="steps[0].time" type="time" required="true"/>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <time class="timeline-time" datetime="2014-01-10T03:45"><span>00-00-00</span></time>
+                            <div class="timeline-icon bg-success">
+                                <i class="entypo-feather"></i>
+                            </div>
+                            <div class="timeline-label">
+                                <form:select path="steps[1].city">
+                                    <form:options items="${cities}" itemValue="id" itemLabel="name"/>
+                                </form:select>
+                                <form:input path="steps[1].date" type="date" required="true"/>
+                                <form:input path="steps[1].time" type="time" required="true"/>
                             </div>
                         </div>
                     </article>
@@ -72,18 +89,6 @@
                 <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
                 </form:form>
 
-            </div>
-            <div class="row col-lg-3" style="height: 400px;">
-                <p>ZONE DE TEST:u</p>
-                <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <c:forEach var="i" begin="1" end="5">
-                        <jsp:include page="step.jsp">
-                            <jsp:param name="y" value="${i}" />
-                        </jsp:include>
-                    </c:forEach>
-                    <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
-                </form:form>
             </div>
         </div>
     </div>
