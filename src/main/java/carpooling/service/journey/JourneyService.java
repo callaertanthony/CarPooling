@@ -4,6 +4,7 @@ import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.form.CreateJourneyForm;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +16,9 @@ public interface JourneyService {
 
     Optional<Journey> getJourneyById(long id);
 
-    Optional<List<Journey>> getAllJourney();
+    //TODO try this !
+    Collection<Journey> getAllJourneysByCitiesName(Collection<String> citiesNames);
 
-    Optional<List<Journey>> getAllJourney(City departure, City arrival);
+    Collection<Journey> getAllJourneysByCities(Collection<City> cities);
 
 }

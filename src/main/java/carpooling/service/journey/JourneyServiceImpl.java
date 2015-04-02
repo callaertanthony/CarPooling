@@ -5,6 +5,7 @@ import carpooling.model.journey.Journey;
 import carpooling.model.journey.Step;
 import carpooling.model.journey.form.CreateJourneyForm;
 import carpooling.model.journey.form.CreateStepForm;
+import carpooling.repository.CityRepository;
 import carpooling.repository.JourneyRepository;
 import carpooling.repository.StepRepository;
 import org.hibernate.Session;
@@ -16,10 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.spi.CalendarNameProvider;
 
 /**
@@ -30,12 +28,14 @@ public class JourneyServiceImpl implements JourneyService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JourneyServiceImpl.class);
     private final JourneyRepository journeyRepository;
-    private final StepRepository stepRepository;
+    private final StepService stepService;
+    private final CityRepository cityRepository;
 
     @Autowired
-    public JourneyServiceImpl(JourneyRepository journeyRepository, StepRepository stepRepository) {
+    public JourneyServiceImpl(JourneyRepository journeyRepository, StepService stepService, CityRepository cityRepository) {
         this.journeyRepository = journeyRepository;
-        this.stepRepository = stepRepository;
+        this.stepService = stepService;
+        this.cityRepository = cityRepository;
     }
 
     @Override
@@ -72,23 +72,26 @@ public class JourneyServiceImpl implements JourneyService {
 
     @Override
     public Optional<Journey> getJourneyById(long id) {
-        LOGGER.debug("Getting journey={}", id);
+        LOGGER.debug("Getting journey by id={}", id);
         return Optional.ofNullable(journeyRepository.findOne(id));
     }
 
     @Override
-    public Optional<List<Journey>> getAllJourney() {
-        return Optional.ofNullable(journeyRepository.findAll()); ///TODO add limits
+    public Collection<Journey> getAllJourneysByCitiesName(Collection<String> citiesNames) {
+        LOGGER.debug("Getting journeys by cities names = {}", citiesNames);
+        List<City> cities = (List<City>) cityRepository.findByNameIgnoreCaseIn(citiesNames);
+        List<Step> steps = (List<Step>) stepService.getAllStepsByCities(cities);
+        List<Journey> journeys = (List<Journey>) journeyRepository.findByStepsIn(steps);
+        return journeys;
     }
-
 
     @Override
-    public Optional<List<Journey>> getAllJourney(City departure, City arrival) {
-
-        //List<Long> l = journeyRepository.findAllJourneyByCities(departure.getId(), arrival.getId());
-        //System.out.println("L size: " + l.size());
-        //List<Journey> j = new ArrayList<>();
-        return Optional.ofNullable(journeyRepository.findByStepsCityOrStepsCity(departure, arrival));
-        //return Optional.ofNullable(journeyRepository.findAllJourneyByCities(departure.getId(), arrival.getId()));
+    public Collection<Journey> getAllJourneysByCities(Collection<City> cities) {
+        LOGGER.debug("Getting journeys by cities = {}", cities);
+        List<Step> steps = (List<Step>) stepService.getAllStepsByCities(cities);
+        List<Journey> journeys = (List<Journey>) journeyRepository.findByStepsIn(steps);
+        return journeys;
     }
+
+
 }

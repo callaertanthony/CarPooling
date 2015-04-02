@@ -48,9 +48,8 @@ public class JourneyViewController {
     public ModelAndView getJourneyList(){
         List<City> cities = cityRepository.findAll();
         ModelAndView mvn = new ModelAndView("journey/list");
-        List<Journey> journeys = new ArrayList<>();
         System.out.println("Testing for cities: " + cities.get(0).getName() + " / " + cities.get(1).getName());
-        journeys = journeyService.getAllJourney(cities.get(0), cities.get(1)).get(); ///TODO
+        List<Journey> journeys = (List<Journey>) journeyService.getAllJourneysByCities(cities);
         System.out.println("List size: " + journeys.size());
         mvn.addObject("journeys", journeys);
 
