@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import java.util.spi.CalendarNameProvider;
 
@@ -64,7 +65,6 @@ public class JourneyServiceImpl implements JourneyService {
             //finaly, adding step to journey
             journey.addStep(step);
         }
-
         return journeyRepository.save(journey);
     }
 
@@ -72,5 +72,10 @@ public class JourneyServiceImpl implements JourneyService {
     public Optional<Journey> getJourneyById(long id) {
         LOGGER.debug("Getting journey={}", id);
         return Optional.ofNullable(journeyRepository.findOne(id));
+    }
+
+    @Override
+    public Optional<List<Journey>> getAllJourney() {
+        return Optional.ofNullable(journeyRepository.findAll()); ///TODO add limits
     }
 }
