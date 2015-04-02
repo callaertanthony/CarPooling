@@ -1,5 +1,6 @@
 package carpooling.service.journey;
 
+import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.Step;
 import carpooling.model.journey.form.CreateJourneyForm;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -77,5 +79,16 @@ public class JourneyServiceImpl implements JourneyService {
     @Override
     public Optional<List<Journey>> getAllJourney() {
         return Optional.ofNullable(journeyRepository.findAll()); ///TODO add limits
+    }
+
+
+    @Override
+    public Optional<List<Journey>> getAllJourney(City departure, City arrival) {
+
+        //List<Long> l = journeyRepository.findAllJourneyByCities(departure.getId(), arrival.getId());
+        //System.out.println("L size: " + l.size());
+        //List<Journey> j = new ArrayList<>();
+        return Optional.ofNullable(journeyRepository.findByStepsCityOrStepsCity(departure, arrival));
+        //return Optional.ofNullable(journeyRepository.findAllJourneyByCities(departure.getId(), arrival.getId()));
     }
 }

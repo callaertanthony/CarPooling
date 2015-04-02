@@ -1,7 +1,9 @@
 package carpooling.controller.journey;
 
+import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.Step;
+import carpooling.repository.CityRepository;
 import carpooling.service.journey.JourneyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,9 @@ import java.util.NoSuchElementException;
 @RequestMapping("/journey/")
 public class JourneyViewController {
 
+    @Autowired
+    private CityRepository cityRepository;
+
     public static final Logger LOGGER = LoggerFactory.getLogger(JourneyViewController.class);
     private final JourneyService journeyService;
 
@@ -41,9 +46,12 @@ public class JourneyViewController {
 
     @RequestMapping("/list")
     public ModelAndView getJourneyList(){
+        List<City> cities = cityRepository.findAll();
         ModelAndView mvn = new ModelAndView("journey/list");
         List<Journey> journeys = new ArrayList<>();
-        journeys = journeyService.getAllJourney().get(); ///TODO
+        System.out.println("Testing for cities: " + cities.get(0).getName() + " / " + cities.get(1).getName());
+        journeys = journeyService.getAllJourney(cities.get(0), cities.get(1)).get(); ///TODO
+        System.out.println("List size: " + journeys.size());
         mvn.addObject("journeys", journeys);
 
         return mvn;

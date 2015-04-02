@@ -80,7 +80,7 @@
                                         <button type="button" class="btn btn-labeled btn-success" href="#">Details</button>
                                     </div>
                                     <div class=" col-md-2 no-pad">
-                                        test
+                                        Id du voyage: ${journey.getId()}
                                     </div>
                                 </div>
                             </div>

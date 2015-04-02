@@ -1,5 +1,6 @@
 package carpooling.service.journey;
 
+import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.form.CreateJourneyForm;
 
@@ -15,4 +16,7 @@ public interface JourneyService {
     Optional<Journey> getJourneyById(long id);
 
     Optional<List<Journey>> getAllJourney();
+
+    Optional<List<Journey>> getAllJourney(City departure, City arrival);
+
 }
