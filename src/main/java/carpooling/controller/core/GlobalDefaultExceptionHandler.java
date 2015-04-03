@@ -3,6 +3,7 @@ package carpooling.controller.core;
 import carpooling.model.account.User;
 import carpooling.model.security.CurrentUser;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalDefaultExceptionHandler {
     public static final String DEFAULT_ERROR_VIEW = "core/error";
+
+    @ExceptionHandler(value = AccessDeniedException.class)
+    public String handleAccessDenied(){
+        return "/core/403";
+    }
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest httpServletRequest, Exception e) throws Exception {
