@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,14 +50,10 @@
                 </form>
 
                 <h1>Publier un trajet<br/></h1>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <input class="btn btn-lg" TYPE="button" VALUE="Publier une annonce" onclick="window.location.href='${pageContext.request.contextPath}/publish'">
-                    </div>
-                </form>
+                <a class="btn btn-default" href="<spring:url value='/journey/create'/>" role="button">Publier</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="${pageContext.request.contextPath}/img/Logo_carpool.png" alt="">
+                <img class="img-responsive" src="<spring:url value="/img/Logo_carpool.png"/>" alt="">
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->
