@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   userConnected: Guillaume
@@ -20,22 +22,21 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <c:choose>
-                    <c:when test="${null != userConnected}">
-                        <li>
-                            <form:form action="${pageContext.request.contextPath}/logout" method="post" class="form-inline left">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  class="form-control"/>
-                                <button type="submit" class="submitLink">Se déconnecter</button>
-                            </form:form>
-                        </li>
-                        <li><a href="${pageContext.request.contextPath}/account/view/${userConnected.getId()}">Mon compte (${userConnected.getFirstName()} ${userConnected.getLastName()})</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li><a href="${pageContext.request.contextPath}/login">Se connecter?</a></li>
-                        <li><a href="${pageContext.request.contextPath}/account/create">S'enregistrer?</a></li>
-                    </c:otherwise>
-                </c:choose>
-
+                <sec:authorize access="isAuthenticated()">
+                    <sec:authentication property="principal.user" var="userConnected" />
+                    <spring:url var="logoutUrl" value="/logout"/>
+                    <li>
+                        <form:form action="${logoutUrl}" method="post" class="form-inline left">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  class="form-control"/>
+                            <button type="submit" class="submitLink">Se déconnecter</button>
+                        </form:form>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="!isAuthenticated()">
+                    <sec:authentication property="principal" />
+                    <li><a href="<spring:url value="/login"/>">Se connecter?</a></li>
+                    <li><a href="<spring:url value="/account/create"/>">S'enregistrer?</a></li>
+                </sec:authorize>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
