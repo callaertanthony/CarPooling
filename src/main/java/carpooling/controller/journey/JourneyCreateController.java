@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Calendar;
 
 /**
  * Created by anthonycallaert on 31/03/15.
@@ -64,6 +65,9 @@ public class JourneyCreateController {
         ModelAndView mvn = new ModelAndView("journey/create");
         mvn.addObject("cities", cityRepository.findAll());
         mvn.addObject("journeyForm", new CreateJourneyForm());
+
+        Calendar calendar = Calendar.getInstance();
+        mvn.addObject("todayDate", calendar.getTime());
         return mvn;
     }
 

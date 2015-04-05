@@ -1,17 +1,19 @@
 $("#add-new-step").click(function () {
+    var template = $(this).attr('data-template');
+    $("#user-journey li:last").before(template);
+});
 
+$("#journeyForm").submit(function() {
+    $('#user-journey li:not(.ui-state-disabled) .timeline-label').each(function(i){
+        var re = new RegExp('__index__', 'g');
+        $(this).children().each(function(){
+            $(this).attr('id', $(this).attr('id').replace(re, i));
+            $(this).attr('name', $(this).attr('name').replace(re, i));
+        });
+    });
+});
 
-    $("#user-journey article:last").before($(
-        '<article class="timeline-entry">' +
-        '<div class="timeline-entry-inner">' +
-        '    <time class="timeline-time" datetime="2014-01-10T03:45"><span>00-00-00</span></time>' +
-        '    <div class="timeline-icon bg-success">' +
-        '    <i class="entypo-feather"></i>' +
-        '    </div>' +
-        '    <div class="timeline-label">' +
-        'TEST -> INSERTION D\'UNE NOUVELLE STEP ICI'+
-        '    </div>' +
-        '    </div>' +
-        '    </article>')
-    );
+$("#user-journey").sortable({
+    items: "li:not(.ui-state-disabled)",
+    cursor: "move"
 });
