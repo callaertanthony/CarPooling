@@ -31,6 +31,7 @@
                             <button type="submit" class="submitLink">Se déconnecter</button>
                         </form:form>
                     </li>
+                    <li><a href="${pageContext.request.contextPath}/account/view/${userConnected.getId()}">Mon compte (${userConnected.getFirstName()} ${userConnected.getLastName()})</a></li>
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
                     <sec:authentication property="principal" />
