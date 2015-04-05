@@ -34,7 +34,6 @@
                     <li><a href="${pageContext.request.contextPath}/account/view/${userConnected.getId()}">Mon compte (${userConnected.getFirstName()} ${userConnected.getLastName()})</a></li>
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
-                    <sec:authentication property="principal" />
                     <li><a href="<spring:url value="/login"/>">Se connecter?</a></li>
                     <li><a href="<spring:url value="/account/create"/>">S'enregistrer?</a></li>
                 </sec:authorize>

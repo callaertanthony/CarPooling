@@ -56,14 +56,7 @@ public class UserCrudController {
     public ModelAndView getUserCreatePage(HttpServletRequest httpServletRequest) {
         LOGGER.debug("Getting user create form");
         ModelAndView modelAndView = new ModelAndView("crud/user/create");
-        //Looking if an user is connected. If yes, return him as an object to the JSP
-        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
-        if(null != auth)
-        {
-            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
-            User user = currentUser.getUser();
-            modelAndView.addObject("userConnected", user);
-        }
+
         modelAndView.addObject("form", new UserCrudCreateForm());
         return modelAndView;
     }
@@ -73,14 +66,6 @@ public class UserCrudController {
     public ModelAndView handleUserCreateForm(@Valid @ModelAttribute("form") UserCrudCreateForm form, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
         ModelAndView modelAndView = new ModelAndView("crud/user/create");
-        //Looking if an user is connected. If yes, return him as an object to the JSP
-        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
-        if(null != auth)
-        {
-            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
-            User user = currentUser.getUser();
-            modelAndView.addObject("userConnected", user);
-        }
         if (bindingResult.hasErrors()) {
             // failed validation
             return modelAndView;
@@ -103,14 +88,6 @@ public class UserCrudController {
     public ModelAndView getUsersPage(HttpServletRequest httpServletRequest) {
         LOGGER.debug("Getting users page");
         ModelAndView modelAndView = new ModelAndView("crud/user/list");
-        //Looking if an user is connected. If yes, return him as an object to the JSP
-        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
-        if(null != auth)
-        {
-            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
-            User user = currentUser.getUser();
-            modelAndView.addObject("userConnected", user);
-        }
         modelAndView.addObject("users", userService.getAllUsers());
         return modelAndView;
     }
