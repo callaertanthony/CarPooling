@@ -18,8 +18,7 @@ public class GlobalErrorController implements ErrorController {
 
     @RequestMapping("/404")
     public String handle404(){
-        //TODO make a 404 jsp
-        return "/core/403tam tam";
+        return "/core/404";
     }
 
     @RequestMapping("/403")
