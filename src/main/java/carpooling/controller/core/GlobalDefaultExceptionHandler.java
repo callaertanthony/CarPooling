@@ -43,14 +43,6 @@ public class GlobalDefaultExceptionHandler {
         modelAndView.addObject("url", httpServletRequest.getRequestURL());
         modelAndView.setViewName(DEFAULT_ERROR_VIEW);
 
-        //Looking if an user is connected. If yes, return him as an object to the JSP
-        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
-        if(null != auth)
-        {
-            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
-            User user = currentUser.getUser();
-            modelAndView.addObject("userConnected", user);
-        }
         return modelAndView;
     }
 }
