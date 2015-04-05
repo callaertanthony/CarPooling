@@ -36,16 +36,7 @@ public class AccountViewController {
         ModelAndView modelAndView = new ModelAndView("account/view");
         modelAndView.addObject("userSeen", userService.getUserById(id)
                 .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
-
-        //Looking if an user is connected. If yes, return him as an object to the JSP
-        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
-        if(null != auth)
-        {
-            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
-            User user = currentUser.getUser();
-            modelAndView.addObject("userConnected", user);
-        }
+        
         return modelAndView;
     }
-
 }

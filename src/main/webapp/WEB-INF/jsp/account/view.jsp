@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -74,19 +75,23 @@
             </tr>
 
         </table>
-        <!-- If the profile is owned by the connected user, allow edition & remove -->
-        <c:if test="${userSeen.getId() == userConnected.getId()}">
-        <div style="text-align:center;">
-            <div class="btn-group" role="group" style="text-align: center;">
-                <a href="${pageContext.request.contextPath}/account/modify">
-                    <button type="button" class="btn btn-default">Modifier</button>
-                </a>
-                <a href="<c:url value="${pageContext.request.contextPath}/account/remove/${userConnected.getId() }"/>">
-                    <button type="button" class="btn btn-default">Supprimer</button>
-                </a>
+
+        <sec:authorize access="isAuthenticated()">
+            <sec:authentication property="principal.user" var="userConnected" />
+            <!-- If the profile is owned by the connected user, allow edition & remove -->
+            <c:if test="${userSeen.getId() == userConnected.getId()}">
+            <div style="text-align:center;">
+                <div class="btn-group" role="group" style="text-align: center;">
+                    <a href="${pageContext.request.contextPath}/account/modify">
+                        <button type="button" class="btn btn-default">Modifier</button>
+                    </a>
+                    <a href="<c:url value="${pageContext.request.contextPath}/account/remove/${userConnected.getId() }"/>">
+                        <button type="button" class="btn btn-default">Supprimer</button>
+                    </a>
+                </div>
             </div>
-        </div>
-        </c:if>
+            </c:if>
+        </sec:authorize>
     </div>
 </div><!-- /headerwrap -->
 
