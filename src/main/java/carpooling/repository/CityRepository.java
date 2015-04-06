@@ -12,4 +12,6 @@ import java.util.List;
 public interface CityRepository extends JpaRepository<City, Long> {
 
     Collection<City> findByNameIgnoreCaseIn(Collection<String> citiesNames);
+
+    City findByNameIgnoreCaseIn(String cityName);
 }

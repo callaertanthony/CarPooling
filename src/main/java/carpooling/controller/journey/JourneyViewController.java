@@ -1,14 +1,13 @@
 package carpooling.controller.journey;
 
-import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
-import carpooling.model.journey.Step;
 import carpooling.repository.CityRepository;
 import carpooling.service.journey.JourneyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,25 +41,10 @@ public class JourneyViewController {
     }
 
     @RequestMapping("/list")
-    public ModelAndView getJourneyList(){
+    public ModelAndView getJourneyList(@ModelAttribute("journeys") List<Journey> journeys){
+        ///TODO get and return departure & arrival cities
         ModelAndView mvn = new ModelAndView("journey/list");
-
-        List<City> cities = cityRepository.findAll(); //Retreive the list of the cities
-        ///TODO DEBUG, hard coded cities (departure/arrival)
-        List<City> citiesSearched = new ArrayList<>();
-        citiesSearched.add(cities.get(0));
-        citiesSearched.add(cities.get(1));
-
-        System.out.println("Testing for cities: " + citiesSearched.get(0).getName() + " / " + citiesSearched.get(1).getName());
-        try {
-            List<Journey> journeys = new ArrayList<>(journeyService.getAllJourneysByCities(citiesSearched));
-            mvn.addObject("journeys", journeys);
-        } catch (Exception e) {
-            System.out.println("DBG - " + e.getMessage()); ///TODO Handle properly this exception
-            List<Journey> journeys = new ArrayList<>();
-            mvn.addObject("journeys", journeys);
-        }
-
+        mvn.addObject("journeys", journeys);
         return mvn;
     }
 }

@@ -1,6 +1,7 @@
 package carpooling.controller.core;
 
 import carpooling.model.account.User;
+import carpooling.model.journey.form.SearchJourneyForm;
 import carpooling.model.security.CurrentUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class HomeController {
     @RequestMapping(value = {"/", "/home"})
     public ModelAndView welcome(HttpServletRequest httpServletRequest){
         LOGGER.debug("Getting home page");
-        ModelAndView modelAndView = new ModelAndView("core/index");
+        ModelAndView modelAndView = new ModelAndView("core/index", "form", new SearchJourneyForm());
 
         return modelAndView;
     }
