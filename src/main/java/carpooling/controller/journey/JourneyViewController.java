@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * Created by anthonycallaert on 31/03/15.
@@ -46,12 +43,23 @@ public class JourneyViewController {
 
     @RequestMapping("/list")
     public ModelAndView getJourneyList(){
-        List<City> cities = cityRepository.findAll();
         ModelAndView mvn = new ModelAndView("journey/list");
-        System.out.println("Testing for cities: " + cities.get(0).getName() + " / " + cities.get(1).getName());
-        List<Journey> journeys = (List<Journey>) journeyService.getAllJourneysByCities(cities);
-        System.out.println("List size: " + journeys.size());
-        mvn.addObject("journeys", journeys);
+
+        List<City> cities = cityRepository.findAll(); //Retreive the list of the cities
+        ///TODO DEBUG, hard coded cities (departure/arrival)
+        List<City> citiesSearched = new ArrayList<>();
+        citiesSearched.add(cities.get(0));
+        citiesSearched.add(cities.get(1));
+
+        System.out.println("Testing for cities: " + citiesSearched.get(0).getName() + " / " + citiesSearched.get(1).getName());
+        try {
+            List<Journey> journeys = new ArrayList<>(journeyService.getAllJourneysByCities(citiesSearched));
+            mvn.addObject("journeys", journeys);
+        } catch (Exception e) {
+            System.out.println("DBG - " + e.getMessage()); ///TODO Handle properly this exception
+            List<Journey> journeys = new ArrayList<>();
+            mvn.addObject("journeys", journeys);
+        }
 
         return mvn;
     }

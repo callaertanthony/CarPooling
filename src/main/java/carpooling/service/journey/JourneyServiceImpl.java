@@ -86,12 +86,36 @@ public class JourneyServiceImpl implements JourneyService {
     }
 
     @Override
-    public Collection<Journey> getAllJourneysByCities(Collection<City> cities) {
+    public Collection<Journey> getAllJourneysByCities(List<City> cities) throws Exception {
         LOGGER.debug("Getting journeys by cities = {}", cities);
+        if(cities.size() != 2)
+            throw new Exception("To search a journey by cities, you must specify exactly two cities (departure and arrival). " +
+                                "Number of cities passed as parameter: " + cities.size());
+
+        //Get all the journeys with the first city from database
         List<Step> steps = (List<Step>) stepService.getAllStepsByCities(cities);
-        List<Journey> journeys = (List<Journey>) journeyRepository.findByStepsIn(steps);
+        Set<Journey> journeys = (Set<Journey>) journeyRepository.findByStepsIn(steps);
+        System.out.println("PROBLEM WITH THIS LIST SIZE: " + journeys.size()); ///TODO find out why we get all journey twice in this list
+
+        //Look into all journeys if we find both departure and arrival cities.
+        //If not, remove it from the journey list
+        Iterator<Journey> iterator = journeys.iterator();
+        while(iterator.hasNext()) {
+            Boolean departureFound = false;
+            Boolean arrivalFound = false;
+            Journey journey = iterator.next();
+            //For each step in this journey, check if we can find the departure or arrival city
+            for(Step step : journey.getSteps()) {
+                if(step.getCity().getId() == cities.get(0).getId())
+                    departureFound = true;
+                if(step.getCity().getId() == cities.get(1).getId())
+                    arrivalFound = true;
+            }
+            //If at least one is missing, remove the journey from the list
+            if(!departureFound || !arrivalFound)
+                iterator.remove();
+            System.out.println("here 32");
+        }
         return journeys;
     }
-
-
 }

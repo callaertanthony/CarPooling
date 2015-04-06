@@ -19,6 +19,6 @@ public interface JourneyService {
     //TODO try this !
     Collection<Journey> getAllJourneysByCitiesName(Collection<String> citiesNames);
 
-    Collection<Journey> getAllJourneysByCities(Collection<City> cities);
+    Collection<Journey> getAllJourneysByCities(List<City> cities) throws Exception;
 
 }

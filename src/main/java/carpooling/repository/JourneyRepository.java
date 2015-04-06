@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -25,5 +26,5 @@ public interface JourneyRepository extends JpaRepository<Journey, Long> {
     //If we can't make it works: Alternative is to take only the arrival city and retrieve this all list.
     //Then, we will be able to evaluate the traject matching (passing by the departure, good direction)
 
-    Collection<Journey> findByStepsIn(Collection<Step> steps);
+    Set<Journey> findByStepsIn(Collection<Step> steps);
 }
