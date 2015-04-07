@@ -40,53 +40,61 @@
     <div class="container">
         <div class="row">
             <div class=".col-xs-12 .col-md-8">
-
-                <h1 class="text-center"> ${journeys[0].getSteps()[0].getCity().getName()} -> ${journeys[0].getSteps()[fn:length(journeys[0].getSteps())-1].getCity().getName()}</h1> <!-- TODO -->
-                <c:forEach items="${journeys}" var="journey">
-                    <article class="container well">
-                        <div class="row user-menu-container square">
-                            <div class="col-md-4 user-details">
-                                <div class="row coralbg white">
-                                    <div class="col-md-6 no-pad">
-                                        <div class="user-pad">
-                                            <h3>UserName</h3>
-                                            <h4 class="white">Lille</h4>
-                                            <h4 class="white">Lorem Ipsum</h4>
-                                            <button type="button" class="btn btn-labeled btn-info" href="#">Voir le profil</button>
+                <c:choose>
+                    <c:when test="${null != journeys}">
+                        <h1 class="text-center"> ${departure.getName()} -> ${arrival.getName()}</h1>
+                        <c:forEach items="${journeys}" var="journey">
+                            <article class="container well">
+                                <div class="row user-menu-container square">
+                                    <div class="col-md-4 user-details">
+                                        <div class="row coralbg white">
+                                            <div class="col-md-6 no-pad">
+                                                <div class="user-pad">
+                                                    <h3>UserName</h3>
+                                                    <h4 class="white">Lille</h4>
+                                                    <h4 class="white">Lorem Ipsum</h4>
+                                                    <button type="button" class="btn btn-labeled btn-info" href="#">Voir le profil</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 no-pad">
+                                                <div class="user-image">
+                                                    <img src="http://media.cargocollective.com/1/0/16982/headerimg/Jxnblk-ShortHair-Circle.png" class="img-responsive thumbnail">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 no-pad">
-                                        <div class="user-image">
-                                            <img src="http://media.cargocollective.com/1/0/16982/headerimg/Jxnblk-ShortHair-Circle.png" class="img-responsive thumbnail">
+                                    <div class="col-md-8 user-menu user-pad">
+                                        <div class="user-menu-content">
+                                            <div class="col-md-10 no-pad">
+                                                Départ: ${journey.getFirstStep().getCity().getName()} <br />
+                                                Arrivée: ${journey.getLastStep().getCity().getName()} <br />
+                                                <br />
+                                                Les étapes:<br />
+                                                <c:forEach items="${journey.getSteps()}" var="step">
+                                                    <fmt:formatDate value="${step.getDateCalendar().getTime()}" var="formattedDate" type="date" pattern="MM-dd-yyyy" />
+                                                    <span>
+                                                        ${step.getCity().getName()} <span>(${formattedDate})</span>
+                                                    </span>
+                                                    <br>
+                                                </c:forEach>
+
+                                                <button type="button" class="btn btn-labeled btn-success" href="#">Details</button>
+                                            </div>
+                                            <div class=" col-md-2 no-pad">
+                                                Id du voyage: ${journey.getId()}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-8 user-menu user-pad">
-                                <div class="user-menu-content">
-                                    <div class="col-md-10 no-pad">
-                                        Départ: ${journey.getFirstStep().getCity().getName()} <br />
-                                        Arrivée: ${journey.getLastStep().getCity().getName()} <br />
-                                        <br />
-                                        Les étapes:<br />
-                                        <c:forEach items="${journey.getSteps()}" var="step">
-                                            <fmt:formatDate value="${step.getDateCalendar().getTime()}" var="formattedDate" type="date" pattern="MM-dd-yyyy" />
-                                            <span>
-                                                ${step.getCity().getName()} <span>(${formattedDate})</span>
-                                            </span>
-                                            <br>
-                                        </c:forEach>
+                            </article>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h1>Désolé, aucun trajet ne correspond à la recherche.</h1>
+                    </c:otherwise>
+                </c:choose>
 
-                                        <button type="button" class="btn btn-labeled btn-success" href="#">Details</button>
-                                    </div>
-                                    <div class=" col-md-2 no-pad">
-                                        Id du voyage: ${journey.getId()}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </c:forEach>
+
             </div>
         </div><!-- /row -->
     </div><!-- /container -->

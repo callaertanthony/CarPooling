@@ -54,29 +54,30 @@ public class JourneySearchController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchAllJourneys(@Valid @ModelAttribute("form") SearchJourneyForm form, BindingResult bindingResult, final RedirectAttributes redirectAttributes){
+        ///TODO DO NOT FORGET TO ADD VERIFICATION ON THE TRAVELING DIRECTION (Lille -> Paris -> Lyon != Lyon -> Paris -> Lille)
         LOGGER.debug("Processing account create form={}, bindingResult={}", form, bindingResult);
-        if(bindingResult.hasErrors()){ ///TODO
-            List<Journey> journeys = new ArrayList<>();
-            journeyViewController.getJourneyList(journeys);
-        }
+
+        //Verify if the cities are known
         City departure = cityRepository.findByNameIgnoreCaseIn(form.getDeparture());
         City arrival = cityRepository.findByNameIgnoreCaseIn(form.getArrival());
-        ///TODO DEBUG, hard coded cities (departure/arrival)
         List<City> citiesSearched = new ArrayList<>();
         citiesSearched.add(departure);
         citiesSearched.add(arrival);
-        System.out.println("Testing for cities: " + citiesSearched.get(0).getName() + " / " + citiesSearched.get(1).getName()); ///TODO DEBUG ONLY
 
-        List<Journey> journeys;
-        journeys = new ArrayList<>();
+        if(bindingResult.hasErrors()){ ///TODO
+            List<Journey> journeys = new ArrayList<>();
+            journeyViewController.getJourneyList(journeys, departure, arrival);
+        }
+
+        List<Journey> journeys = new ArrayList<>();
         try {
             journeys = new ArrayList<>(journeyService.getAllJourneysByCities(citiesSearched));
         } catch (Exception e) {
             System.out.println("DBG - " + e.getMessage()); ///TODO Handle properly this exception
-            journeys = new ArrayList<>();
         }
         redirectAttributes.addFlashAttribute("journeys", journeys);
+        redirectAttributes.addFlashAttribute("departure", departure);
+        redirectAttributes.addFlashAttribute("arrival", arrival);
         return "redirect:/journey/list";
-        //journeyViewController.getJourneyList(journeys);
     }
 }

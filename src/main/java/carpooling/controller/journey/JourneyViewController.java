@@ -1,5 +1,6 @@
 package carpooling.controller.journey;
 
+import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
 import carpooling.repository.CityRepository;
 import carpooling.service.journey.JourneyService;
@@ -41,10 +42,11 @@ public class JourneyViewController {
     }
 
     @RequestMapping("/list")
-    public ModelAndView getJourneyList(@ModelAttribute("journeys") List<Journey> journeys){
-        ///TODO get and return departure & arrival cities
+    public ModelAndView getJourneyList(@ModelAttribute("journeys") List<Journey> journeys, @ModelAttribute("departure") City departure, @ModelAttribute("arrival") City arrival){
         ModelAndView mvn = new ModelAndView("journey/list");
         mvn.addObject("journeys", journeys);
+        mvn.addObject("departure", departure);
+        mvn.addObject("arrival", arrival);
         return mvn;
     }
 }
