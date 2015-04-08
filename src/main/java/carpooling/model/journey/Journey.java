@@ -65,4 +65,20 @@ public class Journey {
     public void setCreator(User creator) {
         this.creator = creator;
     }
+
+    public Step getFirstStep() {
+        if(steps != null && !steps.isEmpty())
+        {
+            return this.steps.get(0);
+        }
+        return new Step();
+    }
+
+    public Step getLastStep() {
+        if(steps != null && !steps.isEmpty())
+        {
+            return this.steps.get(steps.size()-1);
+        }
+        return new Step();
+    }
 }

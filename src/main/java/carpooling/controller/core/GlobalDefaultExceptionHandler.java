@@ -3,6 +3,7 @@ package carpooling.controller.core;
 import carpooling.model.account.User;
 import carpooling.model.security.CurrentUser;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalDefaultExceptionHandler {
     public static final String DEFAULT_ERROR_VIEW = "core/error";
 
+    @ExceptionHandler(value = AccessDeniedException.class)
+    public String handleAccessDenied(){
+        return "/core/403";
+    }
+
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest httpServletRequest, Exception e) throws Exception {
         // If the exception is annotated with @ResponseStatus rethrow it and let
@@ -37,14 +43,6 @@ public class GlobalDefaultExceptionHandler {
         modelAndView.addObject("url", httpServletRequest.getRequestURL());
         modelAndView.setViewName(DEFAULT_ERROR_VIEW);
 
-        //Looking if an user is connected. If yes, return him as an object to the JSP
-        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
-        if(null != auth)
-        {
-            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
-            User user = currentUser.getUser();
-            modelAndView.addObject("userConnected", user);
-        }
         return modelAndView;
     }
 }

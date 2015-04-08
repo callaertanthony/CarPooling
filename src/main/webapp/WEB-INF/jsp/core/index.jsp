@@ -39,15 +39,31 @@
         <div class="row">
             <div class="col-lg-6">
                 <h1>Trouver un trajet<br/></h1>
-                <form class="form-inline" role="form">
+                <form:form name="form" action="/journey/search" method="post" modelAttribute="form" class="form-inline">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="form-group">
-                        <input type="text" class="form-control" id="from" placeholder="De">
+                        <form:label for="departure" path="departure" class="col-sm-4 control-label">De </form:label>
+                        <div class="col-sm-8">
+                            <form:input type="text" name="departure" id="departure" required="true" path="departure" class="form-control"/>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="to" placeholder="Vers">
+                        <form:label for="arrival" path="arrival" class="col-sm-4 control-label">Vers</form:label>
+                        <div class="col-sm-8">
+                            <form:input type="text" name="arrival" id="arrival" required="true" path="arrival" class="form-control"/>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Chercher!</button>
-                </form>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <form:errors/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning btn-lg">Chercher</button>
+                        </div>
+                    </div>
+                </form:form>
 
                 <h1>Publier un trajet<br/></h1>
                 <a class="btn btn-default" href="<spring:url value='/journey/create'/>" role="button">Publier</a>

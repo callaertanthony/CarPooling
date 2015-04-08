@@ -1,6 +1,7 @@
 package carpooling.controller.core;
 
 import carpooling.model.account.User;
+import carpooling.model.journey.form.SearchJourneyForm;
 import carpooling.model.security.CurrentUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,16 +24,8 @@ public class HomeController {
     @RequestMapping(value = {"/", "/home"})
     public ModelAndView welcome(HttpServletRequest httpServletRequest){
         LOGGER.debug("Getting home page");
-        ModelAndView modelAndView = new ModelAndView("core/index");
+        ModelAndView modelAndView = new ModelAndView("core/index", "form", new SearchJourneyForm());
 
-        //Looking if an user is connected. If yes, return him as an object to the JSP
-        Authentication auth = (Authentication) httpServletRequest.getUserPrincipal();
-        if(null != auth)
-        {
-            CurrentUser currentUser = CurrentUserControllerAdvice.getCurrentUser(auth);
-            User user = currentUser.getUser();
-            modelAndView.addObject("userConnected", user);
-        }
         return modelAndView;
     }
 
