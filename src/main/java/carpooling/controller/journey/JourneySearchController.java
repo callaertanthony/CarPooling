@@ -3,6 +3,7 @@ package carpooling.controller.journey;
 import carpooling.model.account.form.AccountCreateForm;
 import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
+import carpooling.model.journey.Step;
 import carpooling.model.journey.form.SearchJourneyForm;
 import carpooling.model.journey.form.SearchJourneyFormValidator;
 import carpooling.repository.CityRepository;
@@ -75,6 +76,7 @@ public class JourneySearchController {
         } catch (Exception e) {
             System.out.println("DBG - " + e.getMessage()); ///TODO Handle properly this exception
         }
+
         redirectAttributes.addFlashAttribute("journeys", journeys);
         redirectAttributes.addFlashAttribute("departure", departure);
         redirectAttributes.addFlashAttribute("arrival", arrival);

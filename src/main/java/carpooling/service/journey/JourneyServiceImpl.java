@@ -93,16 +93,27 @@ public class JourneyServiceImpl implements JourneyService {
         while(iterator.hasNext()) {
             Boolean departureFound = false;
             Boolean arrivalFound = false;
+            int departurePosition = 0;
+            int arrivalPosition = 1;
+
             Journey journey = iterator.next();
             //For each step in this journey, check if we can find the departure or arrival city
             for(Step step : journey.getSteps()) {
                 if(step.getCity().getId() == cities.get(0).getId())
+                {
                     departureFound = true;
+                    //departurePosition = step.getPosition(); ///TODO UNCOMMENT WHEN JOURNEY BRANCH IS MERGED
+                }
                 if(step.getCity().getId() == cities.get(1).getId())
+                {
                     arrivalFound = true;
+                    //arrivalPosition = step.getPosition(); ///TODO UNCOMMENT WHEN JOURNEY BRANCH IS MERGED
+                }
             }
             //If at least one is missing, remove the journey from the list
             if(!departureFound || !arrivalFound)
+                iterator.remove();
+            else if(departurePosition > arrivalPosition)
                 iterator.remove();
         }
         return journeys;
