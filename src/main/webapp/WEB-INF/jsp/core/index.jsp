@@ -66,10 +66,10 @@
                 </form:form>
 
                 <h1>Publier un trajet<br/></h1>
-                <a class="btn btn-default" href="<spring:url value='/journey/create'/>" role="button">Publier</a>
+                <a class="btn btn-default" href="<spring:url value='${pageContext.request.contextPath}/journey/create'/>" role="button">Publier</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="<spring:url value="/img/Logo_carpool.png"/>" alt="">
+                <img class="img-responsive" src="<spring:url value="${pageContext.request.contextPath}/img/Logo_carpool.png"/>" alt="">
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->
