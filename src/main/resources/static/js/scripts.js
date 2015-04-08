@@ -15,6 +15,7 @@ $("#add-new-step").click(function () {
         initGeocomplete();
         //disable inputs
         disableInput();
+        replaceIdAndName();
     }
 });
 
@@ -22,11 +23,33 @@ $("#journeyForm").submit(function() {
     $('#user-journey li:not(.ui-state-disabled) .timeline-label').each(function(i){
         var re = new RegExp('__index__', 'g');
         $(this).children().each(function(){
-            $(this).attr('id', $(this).attr('id').replace(re, i));
+            if($(this).hasAttribute("id"))
+                $(this).attr('id', $(this).attr('id').replace(re, i));
+            if($(this).hasAttribute("name"))
             $(this).attr('name', $(this).attr('name').replace(re, i));
         });
     });
 });
+
+function replaceIdAndName(){
+    $('#user-journey li:not(.ui-state-disabled) .timeline-label').each(function(i){
+        var re = new RegExp('[0-9]+', 'g');
+        var hasId, hasName;
+        var elements = $(this).children();
+        elements.each(function(){
+            hasId = this.hasAttribute("id");
+            hasName = this.hasAttribute("name");
+            if(hasId){
+                $(this).attr('id', $(this).attr('id').replace(re, i));
+                $(this).attr('id', $(this).attr('id').replace("__index__", i));
+            }
+            if(hasName){
+                $(this).attr('name', $(this).attr('name').replace(re, i));
+                $(this).attr('name', $(this).attr('name').replace("__index__", i));
+            }
+        });
+    });
+}
 
 function initSortable(){
     $("#user-journey").sortable({
@@ -36,9 +59,11 @@ function initSortable(){
             initGeocomplete();
             //maybe useless but do it again to be sur !
             disableInput();
+            replaceIdAndName();
         },
         update: function(event, ui){
             disableInput();
+            replaceIdAndName();
         }
     })
 }
@@ -108,67 +133,65 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 var distanceMatrixService = new google.maps.DistanceMatrixService();
 
-var duration;
-
 function calcDistance(start, dest){
+    var dfd = $.Deferred();
     distanceMatrixService.getDistanceMatrix(
         {
             origins: [start],
             destinations: [dest],
             travelMode: google.maps.TravelMode.DRIVING
-        }, callbackDistance
+        }, function(response, status){
+            if (status == google.maps.DistanceMatrixStatus.OK) {
+                dfd.resolve(response);
+            } else
+                dfd.reject(status);
+        }
     );
+    return dfd.promise();
 }
-
-function callbackDistance(response, status){
-    if (status == google.maps.DistanceMatrixStatus.OK) {
-        var element = response.rows[0].elements[0];
-        var distance = element.distance.value;
-        duration = element.duration.value;
-    }
-}
-
-
 
 function calcJourney(){
     var liSteps = $("#user-journey").children().slice(0,-1);
-    var start, dest, time, hours, minutes, date, year, month, day, arrivalDate, element;
+    var start, dest, time, hours, minutes, date, year, month, day, arrivalDate;
     if(liSteps.length == 1){
         return;
     }
     for(i = 1; i < liSteps.length; i++){
-        start = new google.maps.LatLng($('[name$=".lat"]', liSteps[i-1]).val(), $('[name$=".lng"]', liSteps[i-1]).val());
-        dest = new google.maps.LatLng($('[name$=".lat"]', liSteps[i]).val(), $('[name$=".lng"]', liSteps[i]).val());
-        calcDistance(start, dest);
-        setTimeout(function(){
+        console.log("loop : i = " + i);
+        var prev = i-1;
+        start = new google.maps.LatLng($('[name$=".lat"][name*="' + prev + '"]').val(), $('[name$=".lng"][name*="' + prev + '"]').val());
+        dest = new google.maps.LatLng($('[name$=".lat"][name*="' + i + '"]').val(), $('[name$=".lng"][name*="' + i + '"]').val());
+        calcDistance(start, dest).then(function(response){
+            console.log("start then...");
+            console.log("start : " + start);
+            console.log("dest : " + dest);
+            return response.rows[0].elements[0].duration.value;
+        }).done(function(duration){
+            console.log("start done... i = " + i);
             console.log("duration : " + duration);
-            time = $('[id^="steps"][id$=".time"]', liSteps[i-1]).val();
+            time = $('[id^="steps"][id$=".time"][id*="' + prev + ']"').val();
             hours = +time.substring(0,2);
             minutes = +time.substring(3,5);
-            console.log("h : " + hours);
-            console.log("m : " + minutes);
-            date = $('[id^="steps"][id$=".date"]', liSteps[i-1]).val();
+            date = $('[id^="steps"][id$=".date"][id*="' + prev + ']"').val();
             year = +date.substring(0,4);
             month = +date.substring(5,7) - 1;
             day = +date.substring(8,10);
-            console.log("year :" + year);
-            console.log("month :" + month);
-            console.log("day : " + day);
             arrivalDate = new Date(year, month, day, hours, minutes, duration);
-            console.log(arrivalDate);
-            //set the time
-            hours = convert2digits(arrivalDate.getHours());
-            minutes = convert2digits(arrivalDate.getMinutes());
-            //set time in the li element
-            $('[id^="steps"][id$=".time"]', element).attr("value", hours + ":" + minutes + ":00");
             //set the date
             year = convert2digits(arrivalDate.getFullYear());
             month = convert2digits(arrivalDate.getMonth() + 1);
             day = convert2digits(arrivalDate.getDate());
-            element = liSteps[i];
-            //set date in the li element
-            $('[id^="steps"][id$=".date"]', element).attr("value", year + "-" + month + "-" + day);
-        }, 2000);
+            $('[id^="steps"][id$=".date"][id*="' + i + ']"').attr("value", year + "-" + month + "-" + day);
+            //set the time
+            hours = convert2digits(arrivalDate.getHours());
+            minutes = convert2digits(arrivalDate.getMinutes());
+            //set time in the li element
+            time = $('[id^="steps"][id$=".time"][id*="' + i + ']"').attr("value", hours + ":" + minutes + ":00");
+            //set the date
+            year = convert2digits(arrivalDate.getFullYear());
+            month = convert2digits(arrivalDate.getMonth() + 1);
+            day = convert2digits(arrivalDate.getDate());
+        })
     }
 }
 
