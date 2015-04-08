@@ -1,12 +1,15 @@
 package carpooling.model.journey;
 
+import carpooling.model.account.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.util.AutoPopulatingList;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by anthonycallaert on 31/03/15.
@@ -17,6 +20,16 @@ public class Journey {
     @Id
     private long id;
 
+    @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
+    @Valid
+    private List<Step> steps;
+
+    @ManyToOne
+    @CreatedBy
+    private User creator;
+
+    //TODO passengers
+
     public long getId() {
         return id;
     }
@@ -24,10 +37,6 @@ public class Journey {
     public void setId(long id) {
         this.id = id;
     }
-
-    @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
-    @Valid
-    private List<Step> steps;
 
     public List<Step> getSteps() {
         return steps;
@@ -47,6 +56,14 @@ public class Journey {
             steps.add(step);
             step.setJourney(this);
         }
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     public Step getFirstStep() {
