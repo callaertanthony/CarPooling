@@ -18,14 +18,13 @@
       <i class="entypo-feather"></i>
     </div>
     <div class="timeline-label">
-      <select id="steps__index__.city" name="steps[__index__].city">
-        <c:forEach items="${cities}" var="city">
-          <option value="${city.id}">${city.name}</option>
-        </c:forEach>
-      </select>
+      <input id="geocomplete[__index__]" type="text" class="geocomplete"/>
       <fmt:formatDate value="${todayDate}" var="formattedDate" type="both" pattern="yyyy-MM-dd" />
       <input id="steps[__index__].date" name="steps[__index__].date" type="date" required="true" min="${formattedDate}" value="${formattedDate}"/>
-      <input id="steps[__index__].time" name="steps[__index__].time" type="time" required="true"/>
+      <input id="steps[__index__].time" name="steps[__index__].time" type="time" required="true" value="12:00:00"/>
+      <input name="steps[__index__].lat" data-geo="lat" type="hidden" value="">
+      <input name="steps[__index__].lng" data-geo="lng" type="hidden" value="">
+      <input name="steps[__index__].locality" data-geo="locality" type="hidden" value="">
     </div>
   </div>
 </li>

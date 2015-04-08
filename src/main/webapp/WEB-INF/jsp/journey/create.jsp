@@ -41,16 +41,14 @@
     <div id="headerwrap">
         <div class="container">
             <div class="row col-lg-2"></div>
-            <div class="row col-lg-10">
+            <div class="row col-lg-6">
                 <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
                     <ul id="user-journey" class="timeline-centered list-unstyled">
                         <c:import url="step.jsp" var="stepTemplate">
                             <c:param name="cities" value="${cities}"/>
                         </c:import>
 
-                        <!-- we show 2 default steps -->
-                        ${stepTemplate}
-
+                        <!-- we show 1 default start step -->
                         ${stepTemplate}
 
                         <li class="timeline-entry begin ui-state-disabled">
@@ -67,6 +65,11 @@
                 </form:form>
 
             </div>
+            <div class="row col-lg-4">
+                <div id="map-canvas" style="height: 400px;">
+                    Please wait during map is loading.
+                </div>
+            </div>
         </div>
     </div>
 
@@ -77,6 +80,8 @@
     <script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
     <script type="text/javascript" src="<spring:url value="/js/jquery-ui.min.js"/>"></script>
     <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
+    <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
     <script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>
