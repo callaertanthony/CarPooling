@@ -16,6 +16,7 @@ $("#add-new-step").click(function () {
         //disable inputs
         disableInput();
         replaceIdAndName();
+        initDeleteStep();
     }
 });
 
@@ -60,10 +61,12 @@ function initSortable(){
             //maybe useless but do it again to be sur !
             disableInput();
             replaceIdAndName();
+            initDeleteStep();
         },
         update: function(event, ui){
             disableInput();
             replaceIdAndName();
+            calcJourney();
         }
     })
 }
@@ -110,11 +113,6 @@ function initialize() {
 }
 
 function calcRoute(start, end, waypts) {
-    waypts.push({
-        location: new google.maps.LatLng(45.764043, 4.835658999999964),
-        stopover:true
-    });
-
     var request = {
         origin: start,
         destination: end,
@@ -153,30 +151,47 @@ function calcDistance(start, dest){
 function calcJourney(){
     var liSteps = $("#user-journey").children().slice(0,-1);
     var start, dest, time, hours, minutes, date, year, month, day, arrivalDate;
+    var routeStart, routeDest;
     if(liSteps.length == 1){
         return;
     }
-    for(i = 1; i < liSteps.length; i++){
+    var i = 1;
+    var waypts = [];
+    for(x = 1; x < liSteps.length; x++){
         console.log("loop : i = " + i);
-        var prev = i-1;
-        start = new google.maps.LatLng($('[name$=".lat"][name*="' + prev + '"]').val(), $('[name$=".lng"][name*="' + prev + '"]').val());
-        dest = new google.maps.LatLng($('[name$=".lat"][name*="' + i + '"]').val(), $('[name$=".lng"][name*="' + i + '"]').val());
+        var prevX = x-1;
+        start = new google.maps.LatLng($('[name$=".lat"][name*="' + prevX + '"]').val(), $('[name$=".lng"][name*="' + prevX + '"]').val());
+        dest = new google.maps.LatLng($('[name$=".lat"][name*="' + x + '"]').val(), $('[name$=".lng"][name*="' + x + '"]').val());
+        if(prevX == 0){
+            routeStart = start;
+        }
+        if (x == liSteps.length - 1){
+            routeDest = dest;
+        } else {
+            waypts.push({
+                location: dest,
+                stopover:true
+            });
+        }
         calcDistance(start, dest).then(function(response){
-            console.log("start then...");
+            console.log("start then... i = " + i + " x = " + x);
             console.log("start : " + start);
             console.log("dest : " + dest);
             return response.rows[0].elements[0].duration.value;
         }).done(function(duration){
-            console.log("start done... i = " + i);
+            var prevI = i-1;
+            console.log("start done... i = " + i + " x = " + x);
             console.log("duration : " + duration);
-            time = $('[id^="steps"][id$=".time"][id*="' + prev + ']"').val();
+            time = $('[id^="steps"][id$=".time"][id*="' + prevI + ']"').val();
+            console.log("hours : " + hours);
             hours = +time.substring(0,2);
             minutes = +time.substring(3,5);
-            date = $('[id^="steps"][id$=".date"][id*="' + prev + ']"').val();
+            date = $('[id^="steps"][id$=".date"][id*="' + prevI + ']"').val();
             year = +date.substring(0,4);
             month = +date.substring(5,7) - 1;
             day = +date.substring(8,10);
             arrivalDate = new Date(year, month, day, hours, minutes, duration);
+            console.log("arrival date : " + arrivalDate);
             //set the date
             year = convert2digits(arrivalDate.getFullYear());
             month = convert2digits(arrivalDate.getMonth() + 1);
@@ -186,15 +201,21 @@ function calcJourney(){
             hours = convert2digits(arrivalDate.getHours());
             minutes = convert2digits(arrivalDate.getMinutes());
             //set time in the li element
-            time = $('[id^="steps"][id$=".time"][id*="' + i + ']"').attr("value", hours + ":" + minutes + ":00");
-            //set the date
-            year = convert2digits(arrivalDate.getFullYear());
-            month = convert2digits(arrivalDate.getMonth() + 1);
-            day = convert2digits(arrivalDate.getDate());
+            $('[id^="steps"][id$=".time"][id*="' + i + ']"').attr("value", hours + ":" + minutes + ":00");
+            i++;
         })
     }
+    calcRoute(routeStart, routeDest, waypts);
 }
 
 function convert2digits(n){
     return n > 9 ? "" + n : "0" + n;
+}
+
+function initDeleteStep(){
+    $(".deleteStep").click(function(){
+        $(this).parent().parent().remove();
+        replaceIdAndName();
+        calcJourney();
+    })
 }

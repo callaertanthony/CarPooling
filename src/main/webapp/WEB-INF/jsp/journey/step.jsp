@@ -13,7 +13,7 @@
 
 <li class="timeline-entry">
   <div class="timeline-entry-inner">
-    <time class="timeline-time" datetime="2014-01-10T03:45"><span>00-00-00</span></time>
+    <button type="button" class="btn btn-danger deleteStep">Remove</button>
     <div class="timeline-icon bg-success">
       <i class="entypo-feather"></i>
     </div>
