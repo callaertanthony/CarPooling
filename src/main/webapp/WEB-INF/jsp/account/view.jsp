@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -19,9 +20,9 @@
     <title>Profil</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <link href="<spring:url value="/css/bootstrap.css"/> " rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
+    <link href="<spring:url value="/css/main.css"/> " rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -31,9 +32,9 @@
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+    <script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </head>
 <!------------------------------------------------
                 HEADER NAVBAR
@@ -46,10 +47,10 @@
         <!-- Display the profile picture or the default picture if user doesn't have any -->
         <c:choose>
             <c:when test="${not empty userSeen.getPicturePath()}">
-                <img src="${pageContext.request.contextPath}/users/photos/${userSeen.getPicturePath()}" alt="profil photo" class="img-circle pull-right"/>
+                <img src="<spring:url value="/users/photos/${userSeen.getPicturePath()}"/>" alt="profil photo" class="img-circle pull-right"/>
             </c:when>
             <c:otherwise>
-                <img src="${pageContext.request.contextPath}/users/photos/man.gif" alt="profil photo" class="img-circle pull-right"/>
+                <img src="<spring:url value="/users/photos/man.gif"/>" alt="profil photo" class="img-circle pull-right"/>
             </c:otherwise>
         </c:choose>
         <!-- Lookng if the profile visualised is the profile of our currently logged user -->
@@ -99,7 +100,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="<spring:url value="/js/bootstrap.min.js"/>"></script>
 </body>
 </html>
 

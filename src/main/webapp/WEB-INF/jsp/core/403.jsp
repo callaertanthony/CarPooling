@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,12 +19,12 @@
 
     <title>Halte-là!</title>
 
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet"> <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet"> <!-- Custom styles for this template -->
+    <link href="<spring:url value="/css/bootstrap.css"/> " rel="stylesheet"> <!-- Bootstrap core CSS -->
+    <link href="<spring:url value="/css/main.css"/> " rel="stylesheet"> <!-- Custom styles for this template -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="${pageContext.request.contextPath}/js/html5shiv.js"></script>
+    <script src="<spring:url value="/js/html5shiv.js"/>"></script>
     <![endif]-->
 </head>
 
@@ -38,10 +39,10 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h1>Désolé, vous ne disposez pas des autorisations suffisantes pour accéder à cette page.<br/></h1>
-                    <a href="/" class="btn btn-warning btn-lg" role="button">Me ramener à la route connue la plus proche.</a>
+                    <a href="<spring:url value="/"/>" class="btn btn-warning btn-lg" role="button">Me ramener à la route connue la plus proche.</a>
                 </div><!-- /col-lg-6 -->
                 <div class="col-lg-6">
-                    <img class="img-responsive" src="${pageContext.request.contextPath}/img/Logo_carpool-unhappy.png" alt="">
+                    <img class="img-responsive" src="<spring:url value="/img/Logo_carpool-unhappy.png"/>" alt=""/>
                 </div><!-- /col-lg-6 -->
             </div><!-- /row -->
         </div><!-- /container -->
@@ -50,8 +51,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+    <script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>
