@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <h1>Trouver un trajet<br/></h1>
-                <form:form name="form" action="/journey/search" method="post" modelAttribute="form" class="form-inline">
+                <form:form name="form" action="${pageContext.request.contextPath}/journey/search" method="post" modelAttribute="form" class="form-inline">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="form-group">
                         <form:label for="departure" path="departure" class="col-sm-4 control-label">De </form:label>

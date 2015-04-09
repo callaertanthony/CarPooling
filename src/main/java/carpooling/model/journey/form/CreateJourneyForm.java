@@ -18,5 +18,6 @@ public class CreateJourneyForm {
 
     public void setSteps(List<CreateStepForm> steps) {
         this.steps = steps;
+        Step step;
     }
 }

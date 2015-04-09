@@ -48,7 +48,7 @@
                                     <i class="entypo-feather"></i>
                                 </div>
                                 <div class="timeline-label">
-                                    <h2><a href="#">${step.city.locality}</a></h2>
+                                    <h2><a href="#">${step.getCity().getLocality()}</a></h2>
                                     <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
                                 </div>
                             </div>

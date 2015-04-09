@@ -166,4 +166,6 @@ table, td > a, td > a span, .textWhite {
 }
 
 
-
+.col-xs-3.bs-wizard-step {
+    width: 16% !important;
+}

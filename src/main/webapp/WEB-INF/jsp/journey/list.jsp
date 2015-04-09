@@ -43,7 +43,7 @@
             <div class=".col-xs-12 .col-md-8">
                 <c:choose>
                     <c:when test="${null != journeys}">
-                        <h1 class="text-center"> ${departure.getName()} -> ${arrival.getName()}</h1>
+                        <h1 class="text-center"> ${departure.getLocality()} -> ${arrival.getLocality()}</h1>
                         <c:forEach items="${journeys}" var="journey">
                             <article class="container well" style="background-color: #eeeeee;">
                                 <div class="row user-menu-container square">
@@ -81,13 +81,13 @@
                                                     <c:forEach items="${journey.getSteps()}" var="step">
                                                         <c:choose>
                                                             <c:when test="${destinationReached == true}">
-                                                                <div class="col-xs-3 bs-wizard-step disabled">
+                                                                <div class="col-xs-3 bs-wizard-step disabled" style="width: 16%;">
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <div class="col-xs-3 bs-wizard-step complete">
+                                                                <div class="col-xs-3 bs-wizard-step complete" style="width: 16%;">
                                                             </c:otherwise>
                                                         </c:choose>
-                                                            <div class="text-center bs-wizard-stepnum">${step.getCity().getName()}</div>
+                                                            <div class="text-center bs-wizard-stepnum">${step.getCity().getLocality()}</div>
                                                             <div class="progress"><div class="progress-bar"></div></div>
                                                             <c:if test="${journey.getFirstStep().getCity().getId() == step.getCity().getId()}">
                                                                 <div class="bs-wizard-info text-center">Départ</div>
@@ -105,10 +105,9 @@
                                                 <a href="${pageContext.request.contextPath}/journey/view/${journey.getId()}">
                                                     <button type="button" class="btn btn-labeled btn-success">Details</button>
                                                 </a>
-                                                </div>
-                                                <div class=" col-md-2 no-pad">
-                                                    Id du voyage: ${journey.getId()}
-                                                </div>
+                                            </div>
+                                            <div class=" col-md-2 no-pad">
+                                                Id du voyage: ${journey.getId()}
                                             </div>
                                         </div>
                                     </div>
@@ -120,8 +119,6 @@
                         <h1>Désolé, aucun trajet ne correspond à la recherche.</h1>
                     </c:otherwise>
                 </c:choose>
-
-
             </div>
         </div><!-- /row -->
     </div><!-- /container -->
