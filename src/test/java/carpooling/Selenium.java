@@ -13,7 +13,7 @@ import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
 public class Selenium {
 
     @Test
-    public static void testSearchJourney(){
+    public static void testSearchJourney(Boolean isSupposedToExist){
         System.out.println("Début du test de Selenium");
         HtmlUnitDriver driver = new HtmlUnitDriver();
 
@@ -27,8 +27,16 @@ public class Selenium {
 
         System.out.println("Recherche de l'input Vers");
         inputBox = driver.findElementById("arrival");
-        System.out.println("Entrée de 'Paris' dedans");
-        inputBox.sendKeys("Paris");
+        if (isSupposedToExist)
+        {
+            System.out.println("Entrée de 'Paris' dedans");
+            inputBox.sendKeys("Paris");
+        }
+        else
+        {
+            System.out.println("Entrée de 'Tatawin' dedans");
+            inputBox.sendKeys("Tatawin");
+        }
 
         System.out.println("Clic sur Chercher");
         driver.findElementByClassName("btn-lg").click();
@@ -39,13 +47,21 @@ public class Selenium {
         //Count nb of results, must be >0
         int iCount = 0;
         iCount = driver.findElementsByClassName("btn-success").size();
-        assertNotEquals(iCount, 0);
+        if (isSupposedToExist)
+        {
+            assertNotEquals(iCount, 0);
+        }
+        else
+        {
+            assertEquals(iCount, 0);
+        }
+
 
         driver.quit();
     }
 
     public static void main(String[] args) {
 
-        testSearchJourney();
+        testSearchJourney(false);
     }
 }
