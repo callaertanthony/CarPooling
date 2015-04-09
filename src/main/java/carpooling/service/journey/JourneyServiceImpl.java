@@ -30,44 +30,26 @@ public class JourneyServiceImpl implements JourneyService {
     private static final Logger LOGGER = LoggerFactory.getLogger(JourneyServiceImpl.class);
     private final JourneyRepository journeyRepository;
     private final StepService stepService;
-    private final CityRepository cityRepository;
 
     @Autowired
-    public JourneyServiceImpl(JourneyRepository journeyRepository, StepService stepService, CityRepository cityRepository) {
+    public JourneyServiceImpl(JourneyRepository journeyRepository, StepService stepService) {
         this.journeyRepository = journeyRepository;
         this.stepService = stepService;
-        this.cityRepository = cityRepository;
     }
 
     @Override
     public Journey createJourney(CreateJourneyForm form, User user) {
         LOGGER.debug("Journey creation with service");
         Journey journey = new Journey();
-        Calendar calendar = Calendar.getInstance();
-        LocalDate date;
-        LocalTime time;
 
         //set creator
         journey.setCreator(user);
 
         for(CreateStepForm stepForm : form.getSteps()){
             //create step to populate
-            Step step = new Step();
+            Step step = stepService.createStep(stepForm);
 
-            //set date
-            date = stepForm.getDate();
-            time = stepForm.getTime();
-            calendar.set(Calendar.YEAR, date.getYear());
-            calendar.set(Calendar.MONTH, date.getMonth().getValue());
-            calendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
-            calendar.set(Calendar.HOUR_OF_DAY, time.getHour());
-            calendar.set(Calendar.MINUTE, time.getMinute());
-            step.setDateCalendar(calendar);
-
-            //set city
-            step.setCity(stepForm.getCity());
             LOGGER.debug("Add step={} in journey", step);
-
             //finaly, adding step to journey
             journey.addStep(step);
         }

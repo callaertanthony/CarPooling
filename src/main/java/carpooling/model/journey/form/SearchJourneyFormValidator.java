@@ -38,13 +38,13 @@ public class SearchJourneyFormValidator implements Validator {
     }
 
     private void validateDeparture(Errors errors, SearchJourneyForm form){
-        if(null != cityRepository.findByNameIgnoreCaseIn(form.getDeparture())){
+        if(null != cityRepository.findByLocalityIgnoreCaseIn(form.getDeparture())){
             errors.reject("city.no_exist", "The departure city doesn't exist in database");
         }
     }
 
     private void validateArrival(Errors errors, SearchJourneyForm form){
-        if(null != cityRepository.findByNameIgnoreCaseIn(form.getArrival())){
+        if(null != cityRepository.findByLocalityIgnoreCaseIn(form.getArrival())){
             errors.reject("city.no_exist", "The arrival city doesn't exist in database");
         }
     }

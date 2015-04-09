@@ -2,8 +2,10 @@ package carpooling.model.journey.form;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.time.LocalDate;
@@ -16,6 +18,12 @@ import java.util.Calendar;
 @Component
 public class CreateStepFormValidator implements Validator{
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateStepFormValidator.class);
+    private final CreateCityFormValidator createCityFormValidator;
+
+    @Autowired
+    public CreateStepFormValidator(CreateCityFormValidator createCityFormValidator) {
+        this.createCityFormValidator = createCityFormValidator;
+    }
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -24,9 +32,17 @@ public class CreateStepFormValidator implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
-        LOGGER.debug("Validating {}", o);
+        LOGGER.debug("Validating step {}", o);
         CreateStepForm form = (CreateStepForm) o;
         validateDateTime(errors, form);
+        try{
+            errors.pushNestedPath("city");
+            CreateCityForm cityForm = new CreateCityForm(form.getLocality(), form.getLat(), form.getLng());
+            form.setCity(cityForm);
+            ValidationUtils.invokeValidator(createCityFormValidator, form.getCity(), errors);
+        } finally {
+            errors.popNestedPath();
+        }
     }
 
     private void validateDateTime(Errors errors, CreateStepForm form){
@@ -45,7 +61,8 @@ public class CreateStepFormValidator implements Validator{
 
         //compare calendars
         if(formCalendar.before(actualCalendar)){
-            errors.reject("date.passed", "The date has passed");
+            errors.reject("date", "The date has passed");
+            errors.reject("time", "The date has passed");
         }
     }
 }

@@ -29,7 +29,7 @@ public class CreateJourneyFormValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        LOGGER.debug("Validating {}", o);
+        LOGGER.debug("Validating journey {}", o);
         CreateJourneyForm form = (CreateJourneyForm) o;
         validateSteps(errors, form);
         //TODO verify steps order

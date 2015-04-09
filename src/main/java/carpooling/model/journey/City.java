@@ -1,6 +1,8 @@
 package carpooling.model.journey;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -17,7 +19,15 @@ public class City {
 
     @Basic
     @Column(nullable = false, unique = true)
-    private String name;
+    private String locality;
+
+    @Basic
+    @Column(nullable = false)
+    private float latitude;
+
+    @Basic
+    @Column(nullable = false)
+    private float longitude;
 
     public long getId() {
         return id;
@@ -35,11 +45,54 @@ public class City {
         this.steps = steps;
     }
 
-    public String getName() {
-        return name;
+    public String getLocality() {
+        return locality;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocality(String name) {
+        this.locality = name;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public void addStep(Step step){
+        if(step != null){
+            if(steps == null){
+                steps = new HashSet<Step>();
+            }
+            steps.add(step);
+            step.setCity(this);
+        }
+    }
+
+    public City(){
+
+    }
+
+    public City(String locality, float latitude, float longitude) {
+        this.locality = this.locality;
+        this.latitude = this.latitude;
+        this.longitude = this.longitude;
+    }
+
+    public City(Set<Step> steps, String locality, float latitude, float longitude) {
+        this.steps = steps;
+        this.locality = locality;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
