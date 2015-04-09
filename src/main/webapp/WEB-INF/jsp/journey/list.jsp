@@ -23,6 +23,7 @@
 
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">  <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">       <!-- Custom styles for this template -->
+    <link href="${pageContext.request.contextPath}/css/timeline.css" rel="stylesheet">   <!-- Custom styles for timelines -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -44,21 +45,30 @@
                     <c:when test="${null != journeys}">
                         <h1 class="text-center"> ${departure.getName()} -> ${arrival.getName()}</h1>
                         <c:forEach items="${journeys}" var="journey">
-                            <article class="container well">
+                            <article class="container well" style="background-color: #eeeeee;">
                                 <div class="row user-menu-container square">
                                     <div class="col-md-4 user-details">
                                         <div class="row coralbg white">
                                             <div class="col-md-6 no-pad">
                                                 <div class="user-pad">
-                                                    <h3>UserName</h3>
+                                                    <h3>${journey.getCreator().getFirstName()} ${journey.getCreator().getLastName()}</h3>
                                                     <h4 class="white">Lille</h4>
-                                                    <h4 class="white">Lorem Ipsum</h4>
-                                                    <button type="button" class="btn btn-labeled btn-info" href="#">Voir le profil</button>
+                                                    <h4 class="white">${journey.getCreator().getGender()}</h4>
+                                                    <a href="${pageContext.request.contextPath}/account/view/${journey.getCreator().getId()}">
+                                                        <button type="button" class="btn btn-labeled btn-info">Voir le profil</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 no-pad">
                                                 <div class="user-image">
-                                                    <img src="http://media.cargocollective.com/1/0/16982/headerimg/Jxnblk-ShortHair-Circle.png" class="img-responsive thumbnail">
+                                                    <c:choose>
+                                                        <c:when test="${not empty journey.getCreator().getPicturePath()}">
+                                                            <img src="${pageContext.request.contextPath}/users/photos/${journey.getCreator().getPicturePath()}" alt="profil photo" class="img-circle pull-right"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <img src="${pageContext.request.contextPath}/users/photos/man.gif" alt="profil photo" class="img-circle pull-right"/>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </div>
                                             </div>
                                         </div>
@@ -66,22 +76,39 @@
                                     <div class="col-md-8 user-menu user-pad">
                                         <div class="user-menu-content">
                                             <div class="col-md-10 no-pad">
-                                                Départ: ${journey.getFirstStep().getCity().getName()} <br />
-                                                Arrivée: ${journey.getLastStep().getCity().getName()} <br />
-                                                <br />
-                                                Les étapes:<br />
-                                                <c:forEach items="${journey.getSteps()}" var="step">
-                                                    <fmt:formatDate value="${step.getDateCalendar().getTime()}" var="formattedDate" type="date" pattern="MM-dd-yyyy" />
-                                                    <span>
-                                                        ${step.getCity().getName()} <span>(${formattedDate})</span>
-                                                    </span>
-                                                    <br>
-                                                </c:forEach>
-
-                                                <button type="button" class="btn btn-labeled btn-success" href="#">Details</button>
-                                            </div>
-                                            <div class=" col-md-2 no-pad">
-                                                Id du voyage: ${journey.getId()}
+                                                <div class="row bs-wizard" style="border-bottom:0;">
+                                                    <c:set var="destinationReached" value="false"/>
+                                                    <c:forEach items="${journey.getSteps()}" var="step">
+                                                        <c:choose>
+                                                            <c:when test="${destinationReached == true}">
+                                                                <div class="col-xs-3 bs-wizard-step disabled">
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div class="col-xs-3 bs-wizard-step complete">
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                            <div class="text-center bs-wizard-stepnum">${step.getCity().getName()}</div>
+                                                            <div class="progress"><div class="progress-bar"></div></div>
+                                                            <c:if test="${journey.getFirstStep().getCity().getId() == step.getCity().getId()}">
+                                                                <div class="bs-wizard-info text-center">Départ</div>
+                                                            </c:if>
+                                                            <c:if test="${journey.getLastStep().getCity().getId() == step.getCity().getId()}">
+                                                                <div class="bs-wizard-info text-center">Arrivée</div>
+                                                            </c:if>
+                                                            <span class="bs-wizard-dot"></span>
+                                                        </div>
+                                                        <c:if test="${step.getCity().getId() == arrival.getId() && fn:length(journey.getSteps()) gt 2}">
+                                                            <c:set var="destinationReached" value="true"/>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </div>
+                                                <a href="${pageContext.request.contextPath}/journey/view/${journey.getId()}">
+                                                    <button type="button" class="btn btn-labeled btn-success">Details</button>
+                                                </a>
+                                                </div>
+                                                <div class=" col-md-2 no-pad">
+                                                    Id du voyage: ${journey.getId()}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

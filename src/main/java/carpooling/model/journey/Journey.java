@@ -24,7 +24,7 @@ public class Journey {
     @Valid
     private List<Step> steps;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @CreatedBy
     private User creator;
 
