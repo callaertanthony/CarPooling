@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import static com.thoughtworks.selenium.SeleneseTestBase.assertNotEquals;
+import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
+
 /**
  * Created by Olivier on 09/04/2015.
  */
@@ -32,6 +35,11 @@ public class Selenium {
 
         System.out.println("Affichage de l'adresse");
         System.out.println(driver.getCurrentUrl());
+
+        //Count nb of results, must be >0
+        int iCount = 0;
+        iCount = driver.findElementsByClassName("btn-success").size();
+        assertNotEquals(iCount, 0);
 
         driver.quit();
     }
