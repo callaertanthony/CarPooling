@@ -1,7 +1,10 @@
 package carpooling.controller.core;
 
 import carpooling.model.account.User;
+import carpooling.model.journey.form.SearchJourneyForm;
 import carpooling.model.security.CurrentUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,9 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class HomeController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+
     @RequestMapping(value = {"/", "/home"})
     public ModelAndView welcome(HttpServletRequest httpServletRequest){
-        ModelAndView modelAndView = new ModelAndView("core/index");
+        LOGGER.debug("Getting home page");
+        ModelAndView modelAndView = new ModelAndView("core/index", "form", new SearchJourneyForm());
 
         return modelAndView;
     }

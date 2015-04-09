@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +20,8 @@
 
     <title>Carpooling</title>
 
-    <link href="../../css/bootstrap.css" rel="stylesheet"> <!-- Bootstrap core CSS -->
-    <link href="../../css/main.css" rel="stylesheet"> <!-- Custom styles for this template -->
+    <link href="<spring:url value="/css/bootstrap.css"/> " rel="stylesheet"> <!-- Bootstrap core CSS -->
+    <link href="<spring:url value="/css/main.css"/> " rel="stylesheet"> <!-- Custom styles for this template -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -104,7 +105,7 @@
                 </form:form>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="../../img/Logo_carpool.png" alt="">
+                <img class="img-responsive" src="<spring:url value="/img/Logo_carpool.png"/>" alt=""/>
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->
@@ -114,8 +115,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="../../js/jquery.min.js"></script>
-<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../js/scripts.js"></script>
+<script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>

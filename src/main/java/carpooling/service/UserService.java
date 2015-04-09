@@ -4,6 +4,7 @@ import carpooling.model.account.User;
 import carpooling.model.account.form.AccountCreateForm;
 import carpooling.model.account.form.AccountModifyForm;
 import carpooling.model.security.form.UserCrudCreateForm;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Collection;
 import java.util.Optional;

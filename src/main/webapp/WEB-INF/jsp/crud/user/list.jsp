@@ -17,8 +17,8 @@
 
     <title>Profil</title>
 
-    <link href="../../css/bootstrap.css" rel="stylesheet"> <!-- Bootstrap core CSS -->
-    <link href="../../css/main.css" rel="stylesheet"> <!-- Custom styles for this template -->
+    <link href="<spring:url value="/css/bootstrap.css"/> " rel="stylesheet"> <!-- Bootstrap core CSS -->
+    <link href="<spring:url value="/css/main.css"/> " rel="stylesheet"> <!-- Custom styles for this template -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -66,8 +66,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="../../js/jquery.min.js"></script>
-<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../js/scripts.js"></script>
+<script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>
