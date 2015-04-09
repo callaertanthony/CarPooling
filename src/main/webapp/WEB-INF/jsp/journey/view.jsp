@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,13 +20,13 @@
 
     <title>Détail du trajet</title>
 
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">  <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">       <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/css/timeline.css" rel="stylesheet">  <!-- Custom style for the timeline -->
+    <link href="<spring:url value="/css/bootstrap.css"/> " rel="stylesheet">  <!-- Bootstrap core CSS -->
+    <link href="<spring:url value="/css/main.css"/> " rel="stylesheet">       <!-- Custom styles for this template -->
+    <link href="<spring:url value="/css/timeline.css"/> " rel="stylesheet">  <!-- Custom style for the timeline -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="${pageContext.request.contextPath}/js/html5shiv.js"></script>
+    <script src="<spring:url value="/js/html5shiv.js"/>"></script>
     <![endif]-->
 </head>
 
@@ -73,8 +74,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+    <script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>

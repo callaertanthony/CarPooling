@@ -66,10 +66,10 @@
                 </form:form>
 
                 <h1>Publier un trajet<br/></h1>
-                <a class="btn btn-default" href="<spring:url value='${pageContext.request.contextPath}/journey/create'/>" role="button">Publier</a>
+                <a class="btn btn-default" href="<spring:url value="/journey/create"/>" role="button">Publier</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
-                <img class="img-responsive" src="<spring:url value="${pageContext.request.contextPath}/img/Logo_carpool.png"/>" alt="">
+                <img class="img-responsive" src="<spring:url value="/img/Logo_carpool.png"/>" alt="">
             </div><!-- /col-lg-6 -->
 
         </div><!-- /row -->
@@ -79,8 +79,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+<script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>

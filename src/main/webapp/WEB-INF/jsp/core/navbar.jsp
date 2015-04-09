@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><b>Carpooling</b></a>
+            <a class="navbar-brand" href="<spring:url value="/"/>"><b>Carpooling</b></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -31,7 +31,7 @@
                             <button type="submit" class="submitLink">Se déconnecter</button>
                         </form:form>
                     </li>
-                    <li><a href="${pageContext.request.contextPath}/account/view/${userConnected.getId()}">Mon compte (${userConnected.getFirstName()} ${userConnected.getLastName()})</a></li>
+                    <li><a href="<spring:url value="/account/view/${userConnected.getId()}"/>">Mon compte (${userConnected.getFirstName()} ${userConnected.getLastName()})</a></li>
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
                     <li><a href="<spring:url value="/login"/>">Se connecter?</a></li>
