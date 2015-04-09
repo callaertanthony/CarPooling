@@ -53,8 +53,8 @@
                                             <div class="col-md-6 no-pad">
                                                 <div class="user-pad">
                                                     <h3>${journey.getCreator().getFirstName()} ${journey.getCreator().getLastName()}</h3>
-                                                    <h4 class="white">Lille</h4>
-                                                    <h4 class="white">${journey.getCreator().getGender()}</h4>
+                                                    <h4 class="white">journey.getCreator</h4>
+                                                    <span class="white">Sexe: ${journey.getCreator().getGender()}</span>
                                                     <a href="${pageContext.request.contextPath}/account/view/${journey.getCreator().getId()}">
                                                         <button type="button" class="btn btn-labeled btn-info">Voir le profil</button>
                                                     </a>

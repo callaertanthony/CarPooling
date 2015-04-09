@@ -39,36 +39,36 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h1>Trouver un trajet<br/></h1>
-                    <form:form name="form" action="${pageContext.request.contextPath}/journey/search" method="post" modelAttribute="form" class="form-inline">
+                    <form:form name="form" action="${pageContext.request.contextPath}/journey/search" method="post" modelAttribute="form" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         <div class="form-group">
-                            <form:label for="departure" path="departure" class="col-sm-4 control-label">De </form:label>
-                            <div class="col-sm-8">
+                            <form:label for="departure" path="departure" class="col-xs-2 control-label">De </form:label>
+                            <div class="col-xs-10">
                                 <input type="text" id="departure" required="true" class="form-control geocomplete" autocomplete="off">
                                 <input name="departure" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <form:label for="arrival" path="arrival" class="col-sm-4 control-label">Vers</form:label>
-                            <div class="col-sm-8">
+                            <form:label for="arrival" path="arrival" class="col-xs-2 control-label">Vers</form:label>
+                            <div class="col-xs-10">
                                 <input type="text" id="arrival" required="true" class="form-control geocomplete" autocomplete="off">
                                 <input name="arrival" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-xs-offset-2 col-xs-10">
                                 <form:errors/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-xs-offset-2 col-xs-10">
                                 <button type="submit" class="btn btn-warning btn-lg">Chercher</button>
                             </div>
                         </div>
                     </form:form>
 
                 <h1>Publier un trajet<br/></h1>
-                <a class="btn btn-default" href="<spring:url value="/journey/create"/>" role="button">Publier</a>
+                <a class="btn btn-warning btn-lg" href="<spring:url value="/journey/create"/>" role="button">Publier</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
                 <img class="img-responsive" src="<spring:url value="/img/Logo_carpool.png"/>" alt="">

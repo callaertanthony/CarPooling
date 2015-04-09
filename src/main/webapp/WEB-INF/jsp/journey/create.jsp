@@ -60,7 +60,7 @@
                             </div>
                         </li>
                     </ul>
-                <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
+                    <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
                 </form:form>
 
             </div>
