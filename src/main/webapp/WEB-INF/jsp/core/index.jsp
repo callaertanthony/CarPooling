@@ -29,58 +29,61 @@
 </head>
 
 <body>
-<!------------------------------------------------
-                HEADER NAVBAR
------------------------------------------------->
-<jsp:include page="navbar.jsp" />
+    <!------------------------------------------------
+                    HEADER NAVBAR
+    ------------------------------------------------>
+    <jsp:include page="navbar.jsp" />
 
-<div id="headerwrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <h1>Trouver un trajet<br/></h1>
-                <form:form name="form" action="${pageContext.request.contextPath}/journey/search" method="post" modelAttribute="form" class="form-inline">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <div class="form-group">
-                        <form:label for="departure" path="departure" class="col-sm-4 control-label">De </form:label>
-                        <div class="col-sm-8">
-                            <form:input type="text" name="departure" id="departure" required="true" path="departure" class="form-control"/>
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1>Trouver un trajet<br/></h1>
+                    <form:form name="form" action="${pageContext.request.contextPath}/journey/search" method="post" modelAttribute="form" class="form-inline">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <div class="form-group">
+                            <form:label for="departure" path="departure" class="col-sm-4 control-label">De </form:label>
+                            <div class="col-sm-8">
+                                <input type="text" id="departure" required="true" class="form-control geocomplete" autocomplete="off">
+                                <input name="departure" data-geo="locality" type="hidden" value="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <form:label for="arrival" path="arrival" class="col-sm-4 control-label">Vers</form:label>
-                        <div class="col-sm-8">
-                            <form:input type="text" name="arrival" id="arrival" required="true" path="arrival" class="form-control"/>
+                        <div class="form-group">
+                            <form:label for="arrival" path="arrival" class="col-sm-4 control-label">Vers</form:label>
+                            <div class="col-sm-8">
+                                <input type="text" id="arrival" required="true" class="form-control geocomplete" autocomplete="off">
+                                <input name="arrival" data-geo="locality" type="hidden" value="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <form:errors/>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <form:errors/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-warning btn-lg">Chercher</button>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-warning btn-lg">Chercher</button>
+                            </div>
                         </div>
-                    </div>
-                </form:form>
+                    </form:form>
+                    <h1>Publier un trajet<br/></h1>
+                    <a class="btn btn-default" href="<spring:url value='${pageContext.request.contextPath}/journey/create'/>" role="button">Publier</a>
+                </div><!-- /col-lg-6 -->
+                <div class="col-lg-6">
+                    <img class="img-responsive" src="<spring:url value="${pageContext.request.contextPath}/img/Logo_carpool.png"/>" alt="">
+                </div><!-- /col-lg-6 -->
 
-                <h1>Publier un trajet<br/></h1>
-                <a class="btn btn-default" href="<spring:url value='${pageContext.request.contextPath}/journey/create'/>" role="button">Publier</a>
-            </div><!-- /col-lg-6 -->
-            <div class="col-lg-6">
-                <img class="img-responsive" src="<spring:url value="${pageContext.request.contextPath}/img/Logo_carpool.png"/>" alt="">
-            </div><!-- /col-lg-6 -->
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div><!-- /headerwrap -->
 
-        </div><!-- /row -->
-    </div><!-- /container -->
-</div><!-- /headerwrap -->
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
+    <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/home.js"/>"></script>
 </body>
 </html>
