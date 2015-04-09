@@ -20,9 +20,7 @@
 
     <title>Détail du trajet</title>
 
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
-    <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
+
     <link href="<spring:url value="/css/bootstrap.css"/> " rel="stylesheet">  <!-- Bootstrap core CSS -->
     <link href="<spring:url value="/css/main.css"/> " rel="stylesheet">       <!-- Custom styles for this template -->
     <link href="<spring:url value="/css/timeline.css"/> " rel="stylesheet">  <!-- Custom style for the timeline -->
@@ -31,9 +29,12 @@
     <!--[if lt IE 9]>
     <script src="<spring:url value="/js/html5shiv.js"/>"></script>
     <![endif]-->
-    <script type="text/javascript" src="<spring:url value="/js/map-utils.js"/>"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<spring:url value="/js/jquery.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
     <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/map-utils.js"/>"></script>
 </head>
 
 <body>
@@ -46,6 +47,9 @@
         <div class="container">
             <div class="row col-lg-6">
                 <div class="timeline-centered">
+                    <script type="text/javascript">
+                        setTotal(${journey.getSteps().size()});
+                    </script>
                     <c:forEach items="${journey.getSteps()}" var="step">
                         <fmt:formatDate value="${step.dateCalendar.time}" var="formattedDate" type="both" pattern="MM-dd-yyyy" />
                         <article class="timeline-entry">

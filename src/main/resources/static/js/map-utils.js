@@ -1,37 +1,42 @@
 /**
  * Created by Guillaume on 4/9/2015.
  */
-
 var lille = new google.maps.LatLng(50.62925, 3.057256000000052);
-var marseille = new google.maps.LatLng(43.296482, 5.369779999999992);
 var departure;
 var arrival;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
-var steps = new Array();
-
-var waypts = [];
+var steps;
+var waypoints = [];
+var i = 0;
+var y = 0;
+var total = 0;
 var map;
 
-google.maps.event.addDomListener(window, 'load', initialize);
+function setTotal(size) {
+    total = size;
+}
 
 function addStepToArray(latStep, lonStep) {
-    console.log("Adding step: " + latStep + " / " + lonStep);
+    console.log("Adding step: " + latStep + " / " + lonStep + " at " + i);
+    if(i==0)
+    {
+        departure = new google.maps.LatLng(latStep,lonStep);
+        console.log("Added departure");
 
-    if(steps.length == 0) {
-        steps[0] = new Array();
-        steps[0][0] = latStep;
-        steps[0][1] = lonStep;
+    } else if ( i == total-1) {
+        arrival = new google.maps.LatLng(latStep,lonStep);
+        console.log("Added arrival");
+    } else {
+        waypoints[y] = new google.maps.LatLng(latStep,lonStep);
+        console.log("Added waypoints at " + y);
+        y++;
     }
-    else {
-        steps[steps.length-1] = new Array();
-        steps[steps.length-1][0] = latStep;
-        steps[steps.length-1][1] = lonStep;
-    }
-    console.log("Added step: " + steps[steps.length-1][steps.length-1]);
+    i++;
 }
 
 function initialize() {
+    console.log("Initialisation..");
     directionsDisplay = new google.maps.DirectionsRenderer();
     var mapOptions = {
         zoom: 6,
@@ -39,20 +44,17 @@ function initialize() {
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     directionsDisplay.setMap(map);
-    departure = new google.maps.LatLng(steps[0][0],steps[0][1]);
-    arrival = new google.maps.LatLng(steps[steps.length-1][0],steps[steps.length-1][1]);
-    steps.splice(steps[0], 1);
-    steps.splice(steps[steps.length-1], 1);
 
-    calcRoute(departure, arrival, steps)
+    calcRoute();
 }
+google.maps.event.addDomListener(window, 'load', initialize);
 
-function calcRoute(start, end, waypts) {
-    console.log("steps size: " + steps.length);
+function calcRoute() {
+    console.log("In calcRoute() with " + waypoints.length + " waypoints");
     var request = {
         origin: departure,
         destination: arrival,
-        waypoints: steps,
+        waypoints: waypoints,
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING
     };
