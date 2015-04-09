@@ -63,7 +63,6 @@ public class JourneyCreateController {
     public ModelAndView getCreateJourneyForm(){
         LOGGER.debug("Getting create journey page");
         ModelAndView mvn = new ModelAndView("journey/create");
-        mvn.addObject("cities", cityRepository.findAll());
         mvn.addObject("journeyForm", new CreateJourneyForm());
 
         Calendar calendar = Calendar.getInstance();
@@ -79,7 +78,6 @@ public class JourneyCreateController {
         ModelAndView mvn = new ModelAndView("journey/create");
         if(bindingResult.hasErrors()){
             mvn.addObject("journeyForm", journeyForm);
-            mvn.addObject("cities", cityRepository.findAll());
             return mvn;
         }
         try{
@@ -91,7 +89,6 @@ public class JourneyCreateController {
         } catch(DataIntegrityViolationException e){
             LOGGER.warn("Exception occurred when trying to save the journey", e);
             mvn.addObject("journeyForm", journeyForm);
-            mvn.addObject("cities", cityRepository.findAll());
             return mvn;
         }
     }

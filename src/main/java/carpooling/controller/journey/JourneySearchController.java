@@ -1,9 +1,7 @@
 package carpooling.controller.journey;
 
-import carpooling.model.account.form.AccountCreateForm;
 import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
-import carpooling.model.journey.Step;
 import carpooling.model.journey.form.SearchJourneyForm;
 import carpooling.model.journey.form.SearchJourneyFormValidator;
 import carpooling.repository.CityRepository;
@@ -11,13 +9,11 @@ import carpooling.service.journey.JourneyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -59,8 +55,8 @@ public class JourneySearchController {
         LOGGER.debug("Processing account create form={}, bindingResult={}", form, bindingResult);
 
         //Verify if the cities are known
-        City departure = cityRepository.findByNameIgnoreCaseIn(form.getDeparture());
-        City arrival = cityRepository.findByNameIgnoreCaseIn(form.getArrival());
+        City departure = cityRepository.findByLocalityIgnoreCaseIn(form.getDeparture());
+        City arrival = cityRepository.findByLocalityIgnoreCaseIn(form.getArrival());
         List<City> citiesSearched = new ArrayList<>();
         citiesSearched.add(departure);
         citiesSearched.add(arrival);

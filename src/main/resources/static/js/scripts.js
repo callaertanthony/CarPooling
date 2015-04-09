@@ -88,12 +88,12 @@ function initGeocomplete(){
 
 function disableInput(){
     //force activate firsts inputs
-    $('[id^="steps"][id$=".date"]').slice(0,0).prop("disabled", false);
-    $('[id^="steps"][id$=".time"]').slice(0,0).prop("disabled", false);
+    $('[id^="steps"][id$=".date"]').slice(0,0).prop("readonly", false);
+    $('[id^="steps"][id$=".time"]').slice(0,0).prop("readonly", false);
     //we disable all the date input exclude the first one
-    $('[id^="steps"][id$=".date"]').slice(1).prop("disabled", true);
+    $('[id^="steps"][id$=".date"]').slice(1).prop("readonly", true);
     //we disable all the time input exclude the first one
-    $('[id^="steps"][id$=".time"]').slice(1).prop("disabled", true);
+    $('[id^="steps"][id$=".time"]').slice(1).prop("readonly", true);
 }
 
 var lille = new google.maps.LatLng(50.62925, 3.057256000000052);
