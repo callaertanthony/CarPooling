@@ -81,6 +81,7 @@
     <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
     <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/map-utils.js"/>"></script>
     <script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>

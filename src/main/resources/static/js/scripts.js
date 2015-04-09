@@ -112,21 +112,6 @@ function initialize() {
     directionsDisplay.setMap(map);
 }
 
-function calcRoute(start, end, waypts) {
-    var request = {
-        origin: start,
-        destination: end,
-        waypoints: waypts,
-        optimizeWaypoints: true,
-        travelMode: google.maps.TravelMode.DRIVING
-    };
-    directionsService.route(request, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-        }
-    });
-};
-
 google.maps.event.addDomListener(window, 'load', initialize);
 
 var distanceMatrixService = new google.maps.DistanceMatrixService();

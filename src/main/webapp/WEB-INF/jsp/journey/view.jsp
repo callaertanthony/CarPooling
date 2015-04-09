@@ -35,6 +35,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
     <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
     <script type="text/javascript" src="<spring:url value="/js/map-utils.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/journey-view-gmap.js"/>"></script>
 </head>
 
 <body>
@@ -85,10 +86,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
 </body>
 </html>
