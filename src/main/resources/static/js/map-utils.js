@@ -28,7 +28,11 @@ function addStepToArray(latStep, lonStep) {
         arrival = new google.maps.LatLng(latStep,lonStep);
         console.log("Added arrival");
     } else {
-        waypoints[y] = new google.maps.LatLng(latStep,lonStep);
+        var t = new google.maps.LatLng(latStep,lonStep);
+        waypoints.push({
+            location: t,
+            stopover:true
+        });
         console.log("Added waypoints at " + y);
         y++;
     }
