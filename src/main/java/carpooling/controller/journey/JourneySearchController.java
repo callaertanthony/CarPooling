@@ -73,6 +73,8 @@ public class JourneySearchController {
                 System.out.println("DBG - " + e.getMessage());
                 error = "Aucun trajet ne correspond à votre demande.";
             }
+            if(journeys.size() == 0)
+                error = "Aucun trajet ne correspond à votre demande.";
         } else
             error = "Aucun trajet ne correspond à votre demande.";
 
