@@ -4,6 +4,7 @@ import carpooling.model.journey.City;
 import carpooling.model.account.User;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.Step;
+import carpooling.model.journey.form.BookJourneyForm;
 import carpooling.model.journey.form.CreateJourneyForm;
 import carpooling.model.journey.form.CreateStepForm;
 import carpooling.repository.CityRepository;
@@ -14,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -89,12 +91,10 @@ public class JourneyServiceImpl implements JourneyService {
                 if(step.getCity().getId() == cities.get(0).getId())
                 {
                     departureFound = true;
-                    //departurePosition = step.getPosition(); ///TODO UNCOMMENT WHEN JOURNEY BRANCH IS MERGED
                 }
                 if(step.getCity().getId() == cities.get(1).getId())
                 {
                     arrivalFound = true;
-                    //arrivalPosition = step.getPosition(); ///TODO UNCOMMENT WHEN JOURNEY BRANCH IS MERGED
                 }
             }
             //If at least one is missing, remove the journey from the list
@@ -104,5 +104,51 @@ public class JourneyServiceImpl implements JourneyService {
                 iterator.remove();
         }
         return journeys;
+    }
+
+    @Override
+    public Journey bookJourney(BookJourneyForm form, User user) {
+        LOGGER.debug("Booking journey with form={} for user={}", form, user);
+
+        Step start = form.getStart();
+        Step dest = form.getDest();
+
+        Journey journey = start.getJourney();
+        List<Step> steps = journey.getSteps();
+        int idStart = steps.indexOf(start);
+        int idDest = steps.indexOf(dest);
+
+        if(idStart == -1 || idDest == -1){
+            throw new DataIntegrityViolationException("Start and destination steps aren't in the same journey");
+        }
+
+        //search if steps are full
+        int x = idStart;
+        while(x < idDest){
+            Step step = steps.get(x);
+            if(journey.getSeats() - 1 - step.getStartPassengers().size() <= 0){
+                throw new DataIntegrityViolationException("One or more step(s) is full for passengers");
+            }
+            x++;
+        }
+        //add user to passenger start
+        x = idStart;
+        while(x < idDest){
+            Step step = steps.get(x);
+            step.addStartPassenger(user);
+            user.addStartStep(step);
+            x++;
+        }
+        //add user to passenger dest
+        dest.addDestPassenger(user);
+        user.addDestStep(dest);
+
+        return journeyRepository.save(journey);
+    }
+
+    @Override
+    public Set<Journey> getAllJourneysByUser(User user) {
+        Set<Step> steps = stepService.getAllStepsByUser(user);
+        return journeyRepository.findByStepsIn(steps);
     }
 }

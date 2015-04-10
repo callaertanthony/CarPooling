@@ -78,21 +78,4 @@ public class City {
             step.setCity(this);
         }
     }
-
-    public City(){
-
-    }
-
-    public City(String locality, float latitude, float longitude) {
-        this.locality = this.locality;
-        this.latitude = this.latitude;
-        this.longitude = this.longitude;
-    }
-
-    public City(Set<Step> steps, String locality, float latitude, float longitude) {
-        this.steps = steps;
-        this.locality = locality;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 }

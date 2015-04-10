@@ -43,9 +43,7 @@
             <div class="row col-lg-6">
                 <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
                     <ul id="user-journey" class="timeline-centered list-unstyled">
-                        <c:import url="step.jsp" var="stepTemplate">
-                            <c:param name="cities" value="${cities}"/>
-                        </c:import>
+                        <c:import url="step.jsp" var="stepTemplate"/>
 
                         <!-- we show 1 default start step -->
                         ${stepTemplate}
