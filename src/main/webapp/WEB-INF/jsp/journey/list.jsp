@@ -43,81 +43,91 @@
         <div class="row">
             <div class=".col-xs-12 .col-md-8">
                 <c:choose>
-                    <c:when test="${null != journeys}">
-                        <h1 class="text-center"> ${departure.getLocality()} -> ${arrival.getLocality()}</h1>
-                        <c:forEach items="${journeys}" var="journey">
-                            <article class="container well" style="background-color: #eeeeee;">
-                                <div class="row user-menu-container square">
-                                    <div class="col-md-4 user-details">
-                                        <div class="row coralbg white">
-                                            <div class="col-md-6 no-pad">
-                                                <div class="user-pad">
-                                                    <h3>${journey.getCreator().getFirstName()} ${journey.getCreator().getLastName()}</h3>
-                                                    <h4 class="white">Lille</h4>
-                                                    <h4 class="white">${journey.getCreator().getGender()}</h4>
-                                                    <a href="${pageContext.request.contextPath}/account/view/${journey.getCreator().getId()}">
-                                                        <button type="button" class="btn btn-labeled btn-info">Voir le profil</button>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 no-pad">
-                                                <div class="user-image">
-                                                    <c:choose>
-                                                        <c:when test="${not empty journey.getCreator().getPicturePath()}">
-                                                            <img src="<spring:url value="/users/photos/${journey.getCreator().getPicturePath()}"/>" alt="profil photo" class="img-circle pull-right"/>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <img src="<spring:url value="/users/photos/man.gif"/>" alt="profil photo" class="img-circle pull-right"/>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 user-menu user-pad">
-                                        <div class="user-menu-content">
-                                            <div class="col-md-10 no-pad">
-                                                <div class="row bs-wizard" style="border-bottom:0;">
-                                                    <c:set var="destinationReached" value="false"/>
-                                                    <c:forEach items="${journey.getSteps()}" var="step">
-                                                        <c:choose>
-                                                            <c:when test="${destinationReached == true}">
-                                                                <div class="col-xs-3 bs-wizard-step disabled" style="width: 16%;">
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <div class="col-xs-3 bs-wizard-step complete" style="width: 16%;">
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                            <div class="text-center bs-wizard-stepnum">${step.getCity().getLocality()}</div>
-                                                            <div class="progress"><div class="progress-bar"></div></div>
-                                                            <c:if test="${journey.getFirstStep().getCity().getId() == step.getCity().getId()}">
-                                                                <div class="bs-wizard-info text-center">Départ</div>
-                                                            </c:if>
-                                                            <c:if test="${journey.getLastStep().getCity().getId() == step.getCity().getId()}">
-                                                                <div class="bs-wizard-info text-center">Arrivée</div>
-                                                            </c:if>
-                                                            <span class="bs-wizard-dot"></span>
-                                                        </div>
-                                                        <c:if test="${step.getCity().getId() == arrival.getId() && fn:length(journey.getSteps()) gt 2}">
-                                                            <c:set var="destinationReached" value="true"/>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </div>
-                                                <a href="${pageContext.request.contextPath}/journey/view/${journey.getId()}">
-                                                    <button type="button" class="btn btn-labeled btn-success">Details</button>
-                                                </a>
-                                            </div>
-                                            <div class=" col-md-2 no-pad">
-                                                Id du voyage: ${journey.getId()}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        </c:forEach>
+                    <c:when test="${not empty error}">
+                        <h1 class="error">${error}</h1>
+                        <a class="btn btn-warning btn-lg" href="<spring:url value="/"/>" role="button">Refaire une recherche</a>
                     </c:when>
                     <c:otherwise>
-                        <h1>Désolé, aucun trajet ne correspond à la recherche.</h1>
+                        <c:choose>
+                            <c:when test="${null != journeys}">
+                                <h1 class="text-center"> ${departure.getLocality()} -> ${arrival.getLocality()}</h1>
+                                <c:forEach items="${journeys}" var="journey">
+                                    <article class="container well" style="background-color: #eeeeee;">
+                                        <div class="row user-menu-container square">
+                                            <div class="col-md-4 user-details">
+                                                <div class="row coralbg white">
+                                                    <div class="col-md-6 no-pad">
+                                                        <div class="user-pad">
+                                                            <h3>${journey.getCreator().getFirstName()} ${journey.getCreator().getLastName()}</h3>
+                                                            <span class="white">Sexe: ${journey.getCreator().getGender()}</span>
+                                                            <a href="${pageContext.request.contextPath}/account/view/${journey.getCreator().getId()}">
+                                                                <button type="button" class="btn btn-labeled btn-info">Voir le profil</button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 no-pad">
+                                                        <div class="user-image">
+                                                            <c:choose>
+                                                                <c:when test="${not empty journey.getCreator().getPicturePath()}">
+                                                                    <img src="<spring:url value="/users/photos/${journey.getCreator().getPicturePath()}"/>" alt="profil photo" class="img-circle pull-right"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <img src="<spring:url value="/users/photos/man.gif"/>" alt="profil photo" class="img-circle pull-right"/>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 user-menu user-pad">
+                                                <div class="user-menu-content">
+                                                    <div class="col-md-10 no-pad">
+                                                        <div class="row bs-wizard" style="border-bottom:0;">
+                                                            <c:set var="destinationReached" value="false"/>
+                                                            <c:forEach items="${journey.getSteps()}" var="step">
+                                                            <c:choose>
+                                                            <c:when test="${destinationReached == true}">
+                                                            <div class="col-xs-3 bs-wizard-step disabled" style="width: 16%;">
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                <div class="col-xs-3 bs-wizard-step complete" style="width: 16%;">
+                                                                </c:otherwise>
+                                                                    </c:choose>
+                                                                    <div class="text-center bs-wizard-stepnum">${step.getCity().getLocality()}</div>
+                                                                    <div class="progress"><div class="progress-bar"></div></div>
+                                                                    <c:if test="${journey.getFirstStep().getCity().getId() == step.getCity().getId()}">
+                                                                        <div class="bs-wizard-info text-center">Départ</div>
+                                                                    </c:if>
+                                                                    <c:if test="${journey.getLastStep().getCity().getId() == step.getCity().getId()}">
+                                                                        <div class="bs-wizard-info text-center">Arrivée</div>
+                                                                    </c:if>
+                                                                    <span class="bs-wizard-dot"></span>
+                                                                </div>
+                                                                <c:if test="${step.getCity().getId() == arrival.getId() && fn:length(journey.getSteps()) gt 2}">
+                                                                    <c:set var="destinationReached" value="true"/>
+                                                                </c:if>
+                                                                </c:forEach>
+                                                            </div>
+                                                            <a href="<spring:url value="/journey/view/${journey.getId()}"/>">
+                                                                <button type="button" class="btn btn-labeled btn-success">Details</button>
+                                                            </a>
+                                                        </div>
+                                                        <div class=" col-md-2 no-pad">
+                                                            Id: ${journey.getId()}
+                                                            <a href="<spring:url value="/journey/book/${journey.getId()}"/>">
+                                                                <button type="button" class="btn btn-labeled btn-success">Réserver</button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </article>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <h1>Désolé, aucun trajet ne correspond à la recherche.</h1>
+                            </c:otherwise>
+                        </c:choose>
                     </c:otherwise>
                 </c:choose>
             </div>
