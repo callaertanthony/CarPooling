@@ -72,7 +72,7 @@
                                                                     <img src="<spring:url value="/users/photos/${journey.getCreator().getPicturePath()}"/>" alt="profil photo" class="img-circle pull-right"/>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <img src="<spring:url value="/users/photos/man.gif"/>" alt="profil photo" class="img-circle pull-right"/>
+                                                                    <img src="<spring:url value="/users/photos/man.gif"/>" alt="profil photo" id="spy" class="img-circle pull-right"/>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </div>

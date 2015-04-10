@@ -1,6 +1,9 @@
 package carpooling;
 
+import com.fasterxml.jackson.databind.ser.SerializerCache;
+import com.thoughtworks.selenium.webdriven.commands.TypeKeys;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -23,19 +26,22 @@ public class Selenium {
         System.out.println("Recherche de l'input De");
         WebElement inputBox = driver.findElementById("departure");
         System.out.println("Entrée de 'Lille' dedans");
-        inputBox.sendKeys("Lille");
+        inputBox.sendKeys("Lille", Keys.ARROW_DOWN, Keys.TAB);
+        System.out.println(inputBox.getAttribute("value"));
 
         System.out.println("Recherche de l'input Vers");
         inputBox = driver.findElementById("arrival");
         if (isSupposedToExist)
         {
+
+
             System.out.println("Entrée de 'Paris' dedans");
-            inputBox.sendKeys("Paris");
+            inputBox.sendKeys("Paris", Keys.ARROW_DOWN, Keys.TAB);
         }
         else
         {
             System.out.println("Entrée de 'Tatawin' dedans");
-            inputBox.sendKeys("Tatawin");
+            inputBox.sendKeys("Tatawin", Keys.ARROW_DOWN, Keys.TAB);
         }
 
         System.out.println("Clic sur Chercher");
@@ -46,7 +52,7 @@ public class Selenium {
 
         //Count nb of results, must be >0
         int iCount = 0;
-        iCount = driver.findElementsByClassName("btn-success").size();
+        iCount = driver.findElementsById("spy").size();
         if (isSupposedToExist)
         {
             assertNotEquals(iCount, 0);
