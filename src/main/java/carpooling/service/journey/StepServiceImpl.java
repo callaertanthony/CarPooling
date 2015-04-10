@@ -1,5 +1,6 @@
 package carpooling.service.journey;
 
+import carpooling.model.account.User;
 import carpooling.model.journey.City;
 import carpooling.model.journey.Journey;
 import carpooling.model.journey.Step;
@@ -13,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by anthonycallaert on 02/04/15.
@@ -62,5 +61,14 @@ public class StepServiceImpl implements StepService {
         city.addStep(step);
 
         return stepRepository.save(step);
+    }
+
+    @Override
+    public Set<Step> getAllStepsByUser(User user) {
+        Set<Step> destSteps = stepRepository.findByDestPassengers(user);
+        Set<Step> startSteps = stepRepository.findByStartPassengers(user);
+        Set<Step> allSteps = new HashSet<Step>(startSteps);
+        allSteps.addAll(destSteps);
+        return allSteps;
     }
 }

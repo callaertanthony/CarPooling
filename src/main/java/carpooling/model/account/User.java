@@ -1,8 +1,10 @@
 package carpooling.model.account;
 
 import carpooling.model.journey.Journey;
+import carpooling.model.journey.Step;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -42,7 +44,11 @@ public class User {
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
     private Set<Journey> journeysCreated;
 
-    //TODO passengerJourneys
+    @ManyToMany(mappedBy = "startPassengers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Step> startSteps = new HashSet<Step>();
+
+    @ManyToMany(mappedBy = "destPassengers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Step> destSteps = new HashSet<Step>();
 
     public Long getId() {
         return id;
@@ -116,4 +122,48 @@ public class User {
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
+
+    public Set<Journey> getJourneysCreated() {
+        return journeysCreated;
+    }
+
+    public void setJourneysCreated(Set<Journey> journeysCreated) {
+        this.journeysCreated = journeysCreated;
+    }
+
+    public Set<Step> getStartSteps() {
+        return startSteps;
+    }
+
+    public void setStartSteps(Set<Step> startSteps) {
+        this.startSteps = startSteps;
+    }
+
+    public Set<Step> getDestSteps() {
+        return destSteps;
+    }
+
+    public void setDestSteps(Set<Step> destSteps) {
+        this.destSteps = destSteps;
+    }
+
+    public void addStartStep(Step step){
+        if(step != null){
+            if(this.startSteps == null){
+                this.startSteps = new HashSet<Step>();
+            }
+            this.startSteps.add(step);
+        }
+    }
+
+    public void addDestStep(Step step){
+        if(step != null){
+            if(this.destSteps == null){
+                this.destSteps = new HashSet<Step>();
+            }
+            this.destSteps.add(step);
+        }
+    }
+
+    //TODO remove step
 }

@@ -20,7 +20,7 @@ public class Journey {
     @Id
     private long id;
 
-    @OneToMany(mappedBy = "journey", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "journey")
     @Valid
     private List<Step> steps;
 
@@ -28,7 +28,9 @@ public class Journey {
     @CreatedBy
     private User creator;
 
-    //TODO passengers
+    //TODO change for a vehicle
+    @Basic
+    private int seats = 5;
 
     public long getId() {
         return id;
@@ -80,5 +82,13 @@ public class Journey {
             return this.steps.get(steps.size()-1);
         }
         return new Step();
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 }
