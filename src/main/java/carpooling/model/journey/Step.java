@@ -98,12 +98,19 @@ public class Step {
         }
     }
 
-    public boolean isStartStep(User user){
-        return this.startPassengers.contains(user);
+    public boolean haveStartPassenger(User user){
+        for(User u : this.getStartPassengers()){
+            if(u.getId().intValue() == user.getId().intValue())
+                return true;
+        }
+        return false;
     }
 
-    public boolean isDestStep(User user){
-        boolean contains = this.destPassengers.contains(user);
-        return contains;
+    public boolean haveDestPassenger(User user){
+        for(User u : this.getDestPassengers()){
+            if(u.getId().intValue() == user.getId().intValue())
+                return true;
+        }
+        return false;
     }
 }

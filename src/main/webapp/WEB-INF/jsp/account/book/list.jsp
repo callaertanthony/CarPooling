@@ -114,7 +114,7 @@
                                                     </c:if>
                                                     <span class="bs-wizard-dot"></span>
                                                 </div>
-                                                <c:if test="${step.isDestStep(currentUser) && fn:length(journey.getSteps()) gt 2}">
+                                                <c:if test="${step.haveDestPassenger(currentUser) && fn:length(journey.getSteps()) gt 2}">
                                                     <c:set var="destStep" value="true"/>
                                                 </c:if>
                                                 </c:forEach>
