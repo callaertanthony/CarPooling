@@ -51,31 +51,35 @@ public class JourneySearchController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchAllJourneys(@Valid @ModelAttribute("form") SearchJourneyForm form, BindingResult bindingResult, final RedirectAttributes redirectAttributes){
-        ///TODO DO NOT FORGET TO ADD VERIFICATION ON THE TRAVELING DIRECTION (Lille -> Paris -> Lyon != Lyon -> Paris -> Lille)
         LOGGER.debug("Processing account create form={}, bindingResult={}", form, bindingResult);
-
+        String error = "";
         //Verify if the cities are known
+        List<Journey> journeys = new ArrayList<>();
         City departure = cityRepository.findByLocalityIgnoreCaseIn(form.getDeparture());
         City arrival = cityRepository.findByLocalityIgnoreCaseIn(form.getArrival());
-        List<City> citiesSearched = new ArrayList<>();
-        citiesSearched.add(departure);
-        citiesSearched.add(arrival);
 
-        if(bindingResult.hasErrors()){ ///TODO
-            List<Journey> journeys = new ArrayList<>();
-            journeyViewController.getJourneyList(journeys, departure, arrival);
-        }
+        if((null != departure && null != arrival) && !departure.equals(arrival)) {
+            List<City> citiesSearched = new ArrayList<>();
+            citiesSearched.add(departure);
+            citiesSearched.add(arrival);
 
-        List<Journey> journeys = new ArrayList<>();
-        try {
-            journeys = new ArrayList<>(journeyService.getAllJourneysByCities(citiesSearched));
-        } catch (Exception e) {
-            System.out.println("DBG - " + e.getMessage()); ///TODO Handle properly this exception
-        }
+            if(bindingResult.hasErrors()){
+                journeyViewController.getJourneyList(journeys, departure, arrival, error);
+            }
+
+            try {
+                journeys = new ArrayList<>(journeyService.getAllJourneysByCities(citiesSearched));
+            } catch (Exception e) {
+                System.out.println("DBG - " + e.getMessage());
+                error = "Aucun trajet ne correspond à votre demande.";
+            }
+        } else
+            error = "Aucun trajet ne correspond à votre demande.";
 
         redirectAttributes.addFlashAttribute("journeys", journeys);
         redirectAttributes.addFlashAttribute("departure", departure);
         redirectAttributes.addFlashAttribute("arrival", arrival);
+        redirectAttributes.addFlashAttribute("error", error);
         return "redirect:/journey/list";
     }
 }

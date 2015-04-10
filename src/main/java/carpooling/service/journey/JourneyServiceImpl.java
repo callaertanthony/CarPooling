@@ -82,8 +82,8 @@ public class JourneyServiceImpl implements JourneyService {
         while(iterator.hasNext()) {
             Boolean departureFound = false;
             Boolean arrivalFound = false;
-            int departurePosition = 0;
-            int arrivalPosition = 1;
+            Date departureDate = new Date();
+            Date arrivalDate = new Date();
 
             Journey journey = iterator.next();
             //For each step in this journey, check if we can find the departure or arrival city
@@ -91,16 +91,18 @@ public class JourneyServiceImpl implements JourneyService {
                 if(step.getCity().getId() == cities.get(0).getId())
                 {
                     departureFound = true;
+                    departureDate = step.getDateCalendar().getTime();
                 }
                 if(step.getCity().getId() == cities.get(1).getId())
                 {
                     arrivalFound = true;
+                    arrivalDate = step.getDateCalendar().getTime();
                 }
             }
             //If at least one is missing, remove the journey from the list
             if(!departureFound || !arrivalFound)
                 iterator.remove();
-            else if(departurePosition > arrivalPosition)
+            else if(arrivalDate.before(departureDate))
                 iterator.remove();
         }
         return journeys;

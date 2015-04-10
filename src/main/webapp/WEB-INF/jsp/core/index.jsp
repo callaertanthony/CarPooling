@@ -39,36 +39,36 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h1>Trouver un trajet<br/></h1>
-                    <form:form name="form" action="${pageContext.request.contextPath}/journey/search" method="post" modelAttribute="form" class="form-inline">
+                    <form:form name="form" action="${pageContext.request.contextPath}/journey/search" method="post" modelAttribute="form" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         <div class="form-group">
-                            <form:label for="departure" path="departure" class="col-sm-4 control-label">De </form:label>
-                            <div class="col-sm-8">
-                                <input type="text" id="departure" required="true" class="form-control geocomplete" autocomplete="off">
-                                <input name="departure" data-geo="locality" type="hidden" value="">
+                            <form:label for="departure" path="departure" class="col-xs-2 control-label">De </form:label>
+                            <div class="col-xs-10">
+                                <input type="text" id="departure" required="true" class="form-control geocomplete" placeholder="Entrez une ville de départ" autocomplete="off">
+                                <input id="departure-hidden" name="departure" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <form:label for="arrival" path="arrival" class="col-sm-4 control-label">Vers</form:label>
-                            <div class="col-sm-8">
-                                <input type="text" id="arrival" required="true" class="form-control geocomplete" autocomplete="off">
-                                <input name="arrival" data-geo="locality" type="hidden" value="">
+                            <form:label for="arrival" path="arrival" class="col-xs-2 control-label">Vers</form:label>
+                            <div class="col-xs-10">
+                                <input type="text" id="arrival" required="true" class="form-control geocomplete" placeholder="Entrez une ville d'arrivé" autocomplete="off">
+                                <input id="arrival-hidden" name="arrival" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-xs-offset-2 col-xs-10">
                                 <form:errors/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-xs-offset-2 col-xs-10">
                                 <button type="submit" class="btn btn-warning btn-lg">Chercher</button>
                             </div>
                         </div>
                     </form:form>
 
                 <h1>Publier un trajet<br/></h1>
-                <a class="btn btn-default" href="<spring:url value="/journey/create"/>" role="button">Publier</a>
+                <a class="btn btn-warning btn-lg" href="<spring:url value="/journey/create"/>" role="button">Publier</a>
             </div><!-- /col-lg-6 -->
             <div class="col-lg-6">
                 <img class="img-responsive" src="<spring:url value="/img/Logo_carpool.png"/>" alt="">
@@ -87,5 +87,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
 <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
 <script type="text/javascript" src="<spring:url value="/js/home.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/reset-search-inputs.js"/>"></script>
 </body>
 </html>

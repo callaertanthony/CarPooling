@@ -39,8 +39,7 @@
 
     <div id="headerwrap">
         <div class="container">
-            <div class="row col-lg-2"></div>
-            <div class="row col-lg-6">
+            <div class="row col-lg-5">
                 <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
                     <ul id="user-journey" class="timeline-centered list-unstyled">
                         <c:import url="step.jsp" var="stepTemplate"/>
@@ -58,11 +57,12 @@
                             </div>
                         </li>
                     </ul>
-                <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
+                    <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
+                    <br/>
                 </form:form>
 
             </div>
-            <div class="row col-lg-4">
+            <div class="row col-lg-6" style="margin-left:2%;">
                 <div id="map-canvas" style="height: 400px;">
                     Please wait during map is loading.
                 </div>
@@ -79,6 +79,7 @@
     <script type="text/javascript" src="<spring:url value="/js/bootstrap.min.js"/>"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
     <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
+    <script type="text/javascript" src="<spring:url value="/js/map-utils.js"/>"></script>
     <script type="text/javascript" src="<spring:url value="/js/scripts.js"/>"></script>
 </body>
 </html>

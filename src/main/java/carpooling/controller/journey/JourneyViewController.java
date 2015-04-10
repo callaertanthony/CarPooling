@@ -42,11 +42,13 @@ public class JourneyViewController {
     }
 
     @RequestMapping("/list")
-    public ModelAndView getJourneyList(@ModelAttribute("journeys") List<Journey> journeys, @ModelAttribute("departure") City departure, @ModelAttribute("arrival") City arrival){
+    public ModelAndView getJourneyList(@ModelAttribute("journeys") List<Journey> journeys, @ModelAttribute("departure") City departure,
+                                       @ModelAttribute("arrival") City arrival, @ModelAttribute("error") String error){
         ModelAndView mvn = new ModelAndView("journey/list");
         mvn.addObject("journeys", journeys);
         mvn.addObject("departure", departure);
         mvn.addObject("arrival", arrival);
+        mvn.addObject("error", error);
         return mvn;
     }
 }
