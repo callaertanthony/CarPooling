@@ -45,14 +45,14 @@
                             <form:label for="departure" path="departure" class="col-xs-2 control-label">De </form:label>
                             <div class="col-xs-10">
                                 <input type="text" id="departure" required="true" class="form-control geocomplete" placeholder="Entrez une ville de départ" autocomplete="off">
-                                <input name="departure" data-geo="locality" type="hidden" value="">
+                                <input id="departure-hidden" name="departure" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <form:label for="arrival" path="arrival" class="col-xs-2 control-label">Vers</form:label>
                             <div class="col-xs-10">
                                 <input type="text" id="arrival" required="true" class="form-control geocomplete" placeholder="Entrez une ville d'arrivé" autocomplete="off">
-                                <input name="arrival" data-geo="locality" type="hidden" value="">
+                                <input id="arrival-hidden" name="arrival" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -87,5 +87,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key=AIzaSyC7CeEiotpx6dQBasBgb-ENCDAqTpHkhNQ"></script>
 <script type="text/javascript" src="<spring:url value="/js/jquery.geocomplete.min.js"/>"></script>
 <script type="text/javascript" src="<spring:url value="/js/home.js"/>"></script>
+<script type="text/javascript" src="<spring:url value="/js/reset-search-inputs.js"/>"></script>
 </body>
 </html>
