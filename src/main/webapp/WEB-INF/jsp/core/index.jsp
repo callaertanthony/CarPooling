@@ -44,14 +44,14 @@
                         <div class="form-group">
                             <form:label for="departure" path="departure" class="col-xs-2 control-label">De </form:label>
                             <div class="col-xs-10">
-                                <input type="text" id="departure" required="true" class="form-control geocomplete" autocomplete="off">
+                                <input type="text" id="departure" required="true" class="form-control geocomplete" placeholder="Entrez une ville de départ" autocomplete="off">
                                 <input name="departure" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <form:label for="arrival" path="arrival" class="col-xs-2 control-label">Vers</form:label>
                             <div class="col-xs-10">
-                                <input type="text" id="arrival" required="true" class="form-control geocomplete" autocomplete="off">
+                                <input type="text" id="arrival" required="true" class="form-control geocomplete" placeholder="Entrez une ville d'arrivé" autocomplete="off">
                                 <input name="arrival" data-geo="locality" type="hidden" value="">
                             </div>
                         </div>

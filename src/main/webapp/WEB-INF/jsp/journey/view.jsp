@@ -52,7 +52,7 @@
                         setTotal(${journey.getSteps().size()});
                     </script>
                     <c:forEach items="${journey.getSteps()}" var="step">
-                        <fmt:formatDate value="${step.dateCalendar.time}" var="formattedDate" type="both" pattern="MM-dd-yyyy" />
+                        <fmt:formatDate value="${step.dateCalendar.time}" var="formattedDate" type="both" pattern="dd-MM-yyyy" />
                         <article class="timeline-entry">
                             <div class="timeline-entry-inner">
                                 <time class="timeline-time" datetime="2014-01-10T03:45"><span>${formattedDate}</span></time>
@@ -79,7 +79,7 @@
                     </article>
                 </div>
             </div>
-            <div class="row col-lg-6" style="height: 400px;">
+            <div class="row col-lg-6" style="height: 400px; margin-left: 2%;">
                 <div id="map-canvas" style="height: 400px;">
                     Please wait during map is loading.
                 </div>

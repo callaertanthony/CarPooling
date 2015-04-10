@@ -39,8 +39,7 @@
 
     <div id="headerwrap">
         <div class="container">
-            <div class="row col-lg-2"></div>
-            <div class="row col-lg-6">
+            <div class="row col-lg-5">
                 <form:form name="journeyForm" modelAttribute="journeyForm" method="post">
                     <ul id="user-journey" class="timeline-centered list-unstyled">
                         <c:import url="step.jsp" var="stepTemplate">
@@ -61,10 +60,11 @@
                         </li>
                     </ul>
                     <button type="submit" class="btn btn-warning btn-lg">Créer le trajet</button>
+                    <br/>
                 </form:form>
 
             </div>
-            <div class="row col-lg-4">
+            <div class="row col-lg-6" style="margin-left:2%;">
                 <div id="map-canvas" style="height: 400px;">
                     Please wait during map is loading.
                 </div>
