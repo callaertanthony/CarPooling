@@ -16,15 +16,5 @@ import java.util.Set;
  * Created by anthonycallaert on 31/03/15.
  */
 public interface JourneyRepository extends JpaRepository<Journey, Long> {
-    //SELECT DISTINCT step.journey_id FROM journey, step WHERE step.`city_id`='1' OR step.`city_id`='2'
-
-
-    //List<Journey> findByStepsCityOrStepsCity(City departure, City arrival);
-
-    //@Query("SELECT DISTINCT Journey FROM Journey, Step WHERE step.`city_id` = ?1 OR step.`city_id` = ?2")
-    //List<Journey> findAllJourneyByCities(long departure, long arrival);
-    //If we can't make it works: Alternative is to take only the arrival city and retrieve this all list.
-    //Then, we will be able to evaluate the traject matching (passing by the departure, good direction)
-
     Set<Journey> findByStepsIn(Collection<Step> steps);
 }
